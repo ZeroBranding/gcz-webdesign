@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useCart } from "@/contexts/CartContext";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 export const Navigation = () => {
   const { theme, setTheme } = useTheme();
+  const { total, items } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleTheme = () => {
@@ -41,22 +44,37 @@ export const Navigation = () => {
           </Link>
 
           {/* Right: Navigation */}
-          <div className="flex items-center gap-4">
-            {/* Desktop Menu Button */}
+          <div className="flex items-center gap-2">
+            {/* Language Selector */}
+            <LanguageSelector />
+
+            {/* Cart Total */}
+            <div className="hidden sm:flex items-center px-3 py-2 rounded-lg bg-accent/30 border border-primary/20">
+              <span className="text-sm font-numeric font-bold text-gradient-gold">
+                €{total.toFixed(2)}
+              </span>
+            </div>
+
+            {/* Cart Button */}
+            <Link to="/cart">
+              <Button variant="outline" size="icon" className="relative hover-lift">
+                <ShoppingCart className="w-5 h-5" />
+                {items.length > 0 && (
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-accent text-white text-xs rounded-full flex items-center justify-center font-bold animate-glow-pulse">
+                    {items.length}
+                  </span>
+                )}
+              </Button>
+            </Link>
+
+            {/* Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg hover:bg-accent/50 transition-colors"
+              className="p-2 rounded-lg hover:bg-accent/50 transition-colors hover-lift"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-
-            {/* Cart Button */}
-            <Link to="/kontakt">
-              <Button variant="outline" size="icon" className="relative">
-                <ShoppingCart className="w-5 h-5" />
-              </Button>
-            </Link>
           </div>
         </div>
       </nav>

@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "@/contexts/CartContext";
 
 const packages = [
   {
@@ -96,6 +97,28 @@ const addOns = [
 ];
 
 export default function Preise() {
+  const { addItem } = useCart();
+
+  const handleAddPackage = (pkg: typeof packages[0]) => {
+    addItem({
+      id: `package-${pkg.name}`,
+      name: pkg.name,
+      price: pkg.price,
+      type: "package",
+      description: pkg.description,
+    });
+  };
+
+  const handleAddAddon = (addon: typeof addOns[0]) => {
+    addItem({
+      id: `addon-${addon.name}`,
+      name: addon.name,
+      price: addon.price,
+      type: "addon",
+      description: `${addon.description} - ${addon.period}`,
+    });
+  };
+
   return (
     <div className="min-h-screen pt-24 pb-20">
       <div className="container mx-auto px-4">
@@ -167,16 +190,23 @@ export default function Preise() {
                   ))}
                 </ul>
 
-                <Link to="/kontakt">
+                <div className="flex gap-2">
                   <Button
-                    className={`w-full ${
+                    onClick={() => handleAddPackage(pkg)}
+                    className={`flex-1 ${
                       pkg.recommended
                         ? "bg-primary hover:bg-primary/90 shadow-gold"
                         : ""
                     }`}
                     variant={pkg.recommended ? "default" : "outline"}
                   >
-                    Jetzt starten
+                    <ShoppingCart className="w-4 h-4 mr-2" />
+                    In den Warenkorb
+                  </Button>
+                </div>
+                <Link to="/kontakt" className="mt-2 block">
+                  <Button variant="ghost" className="w-full">
+                    Direkt anfragen
                   </Button>
                 </Link>
               </Card>
@@ -200,12 +230,20 @@ export default function Preise() {
               <Card key={index} className="p-6 border-primary/20 hover-lift">
                 <h3 className="text-xl font-heading font-bold mb-2">{addon.name}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{addon.description}</p>
-                <div className="flex items-baseline gap-2">
+                <div className="flex items-baseline gap-2 mb-4">
                   <span className="text-2xl font-numeric font-bold text-gradient-gold">
                     €{addon.price}
                   </span>
                   <span className="text-sm text-muted-foreground">/ {addon.period}</span>
                 </div>
+                <Button
+                  onClick={() => handleAddAddon(addon)}
+                  variant="outline"
+                  className="w-full"
+                >
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Hinzufügen
+                </Button>
               </Card>
             ))}
           </div>
