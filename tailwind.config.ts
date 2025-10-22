@@ -62,11 +62,12 @@ export default {
           dark: "hsl(var(--gold-dark))",
         },
         "red-accent": "hsl(var(--red-accent))",
+        "black-main": "hsl(var(--black-main))",
       },
       fontFamily: {
-        heading: ['Poppins', 'sans-serif'],
+        heading: ['Space Grotesk', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
-        numeric: ['Orbitron', 'monospace'],
+        numeric: ['Inter', 'sans-serif'],
       },
       boxShadow: {
         'gold': 'var(--shadow-gold)',

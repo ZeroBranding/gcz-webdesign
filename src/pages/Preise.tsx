@@ -8,69 +8,63 @@ import { useCart } from "@/contexts/CartContext";
 const packages = [
   {
     name: "Onepager",
-    price: 999,
-    originalPrice: 1499,
-    discount: 33,
+    price: 49,
     description: "Perfekt für Einsteiger",
     features: [
-      "1 Seite / Landing Page",
+      "1 Seite, klares Layout",
       "Responsive Design",
       "Kontaktformular",
-      "SEO Basis-Optimierung",
-      "3 Monate Support",
-      "SSL-Zertifikat",
+      "Basis-SEO",
+      "Performance A",
     ],
   },
   {
-    name: "Landing Page",
-    price: 1799,
-    originalPrice: 2499,
-    discount: 28,
+    name: "Landing",
+    price: 99,
     description: "Für Marketing-Kampagnen",
     features: [
       "3-5 Sektionen",
-      "Premium Animationen",
+      "Premium-Animationen light",
       "Lead-Formulare",
-      "Analytics Integration",
-      "6 Monate Support",
-      "Performance Optimierung",
-      "A/B Testing Setup",
+      "Tracking-Setup",
+      "A/B-Testing Start",
     ],
   },
   {
     name: "Business",
-    price: 3999,
-    originalPrice: 5999,
-    discount: 33,
+    price: 249,
     description: "Für wachsende Unternehmen",
     features: [
-      "Bis zu 10 Seiten",
-      "CMS Integration",
-      "E-Commerce Basis",
-      "Blog-System",
-      "12 Monate Support",
-      "SEO Pro-Optimierung",
-      "Backup & Wartung",
-      "Custom Features",
+      "Bis 10 Seiten",
+      "Blog-Basis",
+      "Erweiterte SEO-Onpage",
+      "3 Formular-Flows",
+      "Bild-Optimierung",
     ],
     recommended: true,
   },
   {
     name: "Pro / Agentur",
-    price: 7999,
-    originalPrice: 11999,
-    discount: 33,
-    description: "Komplette Enterprise-Lösung",
+    price: 499,
+    description: "Komplette Pro-Lösung",
     features: [
-      "Unbegrenzte Seiten",
-      "Full-Stack Entwicklung",
-      "API Integrationen",
-      "Dedizierter Support",
-      "24 Monate Premium Support",
-      "Performance Garantie",
-      "Skalierbare Architektur",
-      "White Label möglich",
-      "Prioritäts-Updates",
+      "Bis 20 Seiten",
+      "CMS-Integration light",
+      "Performance-kritisch",
+      "Prior-Support 3 Monate",
+      "Skalierbare Komponenten",
+    ],
+  },
+  {
+    name: "Enterprise",
+    price: 999,
+    description: "Individuelle Enterprise-Lösung",
+    features: [
+      "Individuelle IA",
+      "Komplexe Komponenten",
+      "Strukturierte Inhalte",
+      "Prior-Support 6 Monate",
+      "Full-Service",
     ],
   },
 ];
@@ -169,14 +163,6 @@ export default function Preise() {
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-numeric font-bold text-gradient-gold">
                       €{pkg.price}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 mt-2">
-                    <span className="text-lg text-muted-foreground line-through">
-                      €{pkg.originalPrice}
-                    </span>
-                    <span className="bg-secondary text-secondary-foreground px-2 py-1 rounded text-sm font-bold">
-                      -{pkg.discount}%
                     </span>
                   </div>
                 </div>

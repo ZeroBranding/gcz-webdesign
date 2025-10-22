@@ -9,47 +9,48 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Light Mode - Modern, elegant, neutral */
-    --background: 210 40% 91%;
-    --foreground: 0 0% 4%;
+    --background: 0 0% 96%;
+    --foreground: 0 0% 7%;
     
     --card: 0 0% 98%;
-    --card-foreground: 0 0% 4%;
+    --card-foreground: 0 0% 7%;
     
     --popover: 0 0% 98%;
-    --popover-foreground: 0 0% 4%;
+    --popover-foreground: 0 0% 7%;
     
-    --primary: 206 35% 70%; /* Blue-gray */
-    --primary-foreground: 0 0% 4%;
+    --primary: 45 100% 50%; /* Gold #FFD700 */
+    --primary-foreground: 0 0% 7%;
     
-    --secondary: 45 75% 48%; /* Gold #E6B800 */
-    --secondary-foreground: 0 0% 4%;
+    --secondary: 0 100% 56%; /* Red #FF0020 */
+    --secondary-foreground: 0 0% 98%;
     
-    --accent: 0 0% 82%; /* Silver #D0D0D0 */
-    --accent-foreground: 0 0% 4%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 7%;
     
-    --destructive: 0 78% 54%; /* Red */
+    --destructive: 0 100% 56%;
     --destructive-foreground: 0 0% 98%;
     
-    --muted: 210 40% 88%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 45%;
     
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    --ring: 206 35% 70%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 45 100% 50%;
     
     --radius: 0.75rem;
     
     /* Custom tokens for luxury design */
     --gold: 45 100% 50%; /* Pure Gold #FFD700 */
-    --gold-dark: 45 75% 48%; /* #E6B800 */
-    --red-accent: 0 78% 54%; /* #D21F1F */
+    --gold-dark: 45 90% 45%;
+    --red-accent: 0 100% 56%; /* #FF0020 */
+    --black-main: 0 0% 4%; /* #0B0B0C */
     --glass-bg: 0 0% 100% / 0.1;
     --glow-gold: 45 100% 50% / 0.5;
-    --glow-red: 0 78% 54% / 0.5;
+    --glow-red: 0 100% 56% / 0.5;
     
     /* Gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(45 100% 50%), hsl(45 75% 48%));
-    --gradient-luxury: linear-gradient(135deg, hsl(45 100% 50%), hsl(0 78% 54%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 50%), hsl(45 90% 45%));
+    --gradient-luxury: linear-gradient(135deg, hsl(45 100% 50%), hsl(0 100% 56%));
     --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     
     /* Shadows */
@@ -69,7 +70,7 @@ All colors MUST be HSL.
 
   .dark {
     /* Dark Mode - Luxury, energy, focus */
-    --background: 0 0% 4%; /* Black #0A0A0A */
+    --background: 0 0% 4%; /* Black #0B0B0C */
     --foreground: 0 0% 98%;
     
     --card: 0 0% 8%;
@@ -81,13 +82,13 @@ All colors MUST be HSL.
     --primary: 45 100% 50%; /* Gold #FFD700 */
     --primary-foreground: 0 0% 4%;
     
-    --secondary: 0 78% 54%; /* Red #D21F1F */
+    --secondary: 0 100% 56%; /* Red #FF0020 */
     --secondary-foreground: 0 0% 98%;
     
     --accent: 0 0% 15%;
     --accent-foreground: 0 0% 98%;
     
-    --destructive: 0 78% 54%;
+    --destructive: 0 100% 56%;
     --destructive-foreground: 0 0% 98%;
     
     --muted: 0 0% 15%;
@@ -101,15 +102,16 @@ All colors MUST be HSL.
     
     /* Custom tokens for luxury design */
     --gold: 45 100% 50%;
-    --gold-dark: 45 75% 48%;
-    --red-accent: 0 78% 54%;
+    --gold-dark: 45 90% 45%;
+    --red-accent: 0 100% 56%; /* #FF0020 */
+    --black-main: 0 0% 4%; /* #0B0B0C */
     --glass-bg: 0 0% 100% / 0.05;
     --glow-gold: 45 100% 50% / 0.5;
-    --glow-red: 0 78% 54% / 0.5;
+    --glow-red: 0 100% 56% / 0.5;
     
     /* Gradients */
-    --gradient-gold: linear-gradient(135deg, hsl(45 100% 50%), hsl(45 75% 48%));
-    --gradient-luxury: linear-gradient(135deg, hsl(45 100% 50%), hsl(0 78% 54%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 50%), hsl(45 90% 45%));
+    --gradient-luxury: linear-gradient(135deg, hsl(45 100% 50%), hsl(0 100% 56%));
     --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
     
     /* Shadows */
@@ -134,17 +136,19 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
   }
 }
 
 @layer utilities {
   .font-heading {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
   }
   
@@ -154,7 +158,7 @@ All colors MUST be HSL.
   }
   
   .font-numeric {
-    font-family: 'Orbitron', monospace;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
   }
   
