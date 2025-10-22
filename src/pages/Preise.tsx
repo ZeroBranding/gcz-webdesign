@@ -71,22 +71,34 @@ const packages = [
 
 const addOns = [
   {
-    name: "SEO Premium Paket",
-    price: 499,
+    name: "SEO Premium",
+    price: 249,
     period: "einmalig",
     description: "Erweiterte Suchmaschinenoptimierung",
   },
   {
     name: "Wartung & Updates",
-    price: 99,
+    price: 29,
     period: "monatlich",
     description: "Laufende Pflege und Aktualisierungen",
   },
   {
     name: "Content Creation",
-    price: 299,
+    price: 99,
     period: "monatlich",
     description: "Professionelle Texte und Bilder",
+  },
+  {
+    name: "Logo & Brand Design",
+    price: 199,
+    period: "einmalig",
+    description: "Individuelles Corporate Design",
+  },
+  {
+    name: "Performance Boost",
+    price: 149,
+    period: "einmalig",
+    description: "Optimierung für maximale Geschwindigkeit",
   },
 ];
 
@@ -132,7 +144,7 @@ export default function Preise() {
         </motion.div>
 
         {/* Packages Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-20">
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
@@ -211,7 +223,7 @@ export default function Preise() {
             Add-Ons
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {addOns.map((addon, index) => (
               <Card key={index} className="p-6 border-primary/20 hover-lift">
                 <h3 className="text-xl font-heading font-bold mb-2">{addon.name}</h3>

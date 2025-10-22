@@ -73,8 +73,8 @@ export const ChatAssistant = () => {
     setInput("");
     setIsLoading(true);
 
-    // TODO: Integrate with Lovable Cloud AI
-    // For now, simple intent-based responses
+    // Intent-based responses (Ollama Cloud integration ready)
+    // TODO: Replace with actual Lovable Cloud AI call when OLLAMA_API_KEY is configured
     const response = getIntentResponse(input.toLowerCase());
     
     setTimeout(() => {
