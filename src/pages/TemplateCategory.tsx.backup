@@ -3,10 +3,28 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Check, Smartphone, Globe, Zap, Shield, Palette, Headphones } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
-// Template-Daten (gleiche wie in TemplateCategory)
-const categoryData: Record<string, any> = {
+interface Template {
+  id: string;
+  name: string;
+  originalPrice: number;
+  price: number;
+  discount: number;
+  level: string;
+  image: string;
+  description: string;
+  features: string[];
+  tech: string[];
+}
+
+interface CategoryData {
+  name: string;
+  emoji: string;
+  templates: Template[];
+}
+
+const categoryData: Record<string, CategoryData> = {
   "e-commerce": {
     name: "E-Commerce",
     emoji: "🛒",
@@ -28,11 +46,7 @@ const categoryData: Record<string, any> = {
           "Schnelle Ladezeiten",
           "Mobile-optimiert"
         ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop"
-        ]
+        tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"]
       },
       {
         id: "business-ecommerce",
@@ -53,11 +67,7 @@ const categoryData: Record<string, any> = {
           "Google Analytics",
           "Newsletter-Anmeldung"
         ],
-        tech: ["React", "Node.js", "SEO", "Analytics", "CMS"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop"
-        ]
+        tech: ["React", "Node.js", "SEO", "Analytics", "CMS"]
       },
       {
         id: "premium-ecommerce",
@@ -80,11 +90,7 @@ const categoryData: Record<string, any> = {
           "Custom Animationen",
           "Brand Guidelines"
         ],
-        tech: ["Next.js", "TypeScript", "Advanced SEO", "CRM", "Multi-Language"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop"
-        ]
+        tech: ["Next.js", "TypeScript", "Advanced SEO", "CRM", "Multi-Language"]
       },
       {
         id: "enterprise-ecommerce",
@@ -109,11 +115,7 @@ const categoryData: Record<string, any> = {
           "Custom Development",
           "SLA Garantie"
         ],
-        tech: ["Enterprise Stack", "Microservices", "Cloud", "Security", "DevOps"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
-        ]
+        tech: ["Enterprise Stack", "Microservices", "Cloud", "Security", "DevOps"]
       }
     ]
   },
@@ -124,9 +126,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-gastronomie",
         name: "Onepager Gastronomie",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Restaurants mit Speisekarte und Reservierung.",
@@ -138,18 +138,12 @@ const categoryData: Record<string, any> = {
           "Standort & Öffnungszeiten",
           "Mobile-optimiert"
         ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Mobile-First"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop"
-        ]
+        tech: ["HTML5", "CSS3", "JavaScript", "Mobile-First"]
       },
       {
         id: "business-gastronomie",
         name: "Business Gastronomie",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop",
         description: "Vollständige Restaurant-Website mit mehreren Seiten und erweiterten Funktionen.",
@@ -163,18 +157,12 @@ const categoryData: Record<string, any> = {
           "SEO-Optimierung",
           "Social Media Integration"
         ],
-        tech: ["React", "Booking System", "Gallery", "SEO"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop"
-        ]
+        tech: ["React", "Booking System", "Gallery", "SEO"]
       },
       {
         id: "premium-gastronomie",
         name: "Premium Gastronomie",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
         description: "Premium-Lösung für gehobene Gastronomie mit exklusiven Features.",
@@ -190,18 +178,12 @@ const categoryData: Record<string, any> = {
           "Custom Animationen",
           "Brand Guidelines"
         ],
-        tech: ["Premium Stack", "Multi-Language", "CRM", "Loyalty"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop"
-        ]
+        tech: ["Premium Stack", "Multi-Language", "CRM", "Loyalty"]
       },
       {
         id: "enterprise-gastronomie",
         name: "Enterprise Gastronomie",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für Restaurant-Ketten und große Gastronomiebetriebe.",
@@ -217,11 +199,7 @@ const categoryData: Record<string, any> = {
           "24/7 Support",
           "Custom Development"
         ],
-        tech: ["Enterprise", "Multi-Location", "Analytics", "API"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=800&h=600&fit=crop"
-        ]
+        tech: ["Enterprise", "Multi-Location", "Analytics", "API"]
       }
     ]
   },
@@ -232,9 +210,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-immobilien",
         name: "Onepager Immobilien",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Immobilienmakler mit Objektpräsentation.",
@@ -246,18 +222,12 @@ const categoryData: Record<string, any> = {
           "Grundlegende SEO",
           "Mobile-optimiert"
         ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Gallery"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop"
-        ]
+        tech: ["HTML5", "CSS3", "JavaScript", "Gallery"]
       },
       {
         id: "business-immobilien",
         name: "Business Immobilien",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
         description: "Vollständige Makler-Website mit Portfolio und erweiterten Features.",
@@ -271,18 +241,12 @@ const categoryData: Record<string, any> = {
           "SEO-Optimierung",
           "Social Media Integration"
         ],
-        tech: ["React", "Search", "Virtual Tours", "Portfolio"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
-        ]
+        tech: ["React", "Search", "Virtual Tours", "Portfolio"]
       },
       {
         id: "premium-immobilien",
         name: "Premium Immobilien",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
         description: "Premium-Lösung für Luxusimmobilien mit exklusivem Design.",
@@ -298,18 +262,12 @@ const categoryData: Record<string, any> = {
           "Brand Guidelines",
           "Priority Support"
         ],
-        tech: ["360° Tours", "CRM", "Multi-Language", "Lead Management"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
-        ]
+        tech: ["360° Tours", "CRM", "Multi-Language", "Lead Management"]
       },
       {
         id: "enterprise-immobilien",
         name: "Enterprise Immobilien",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für große Immobilienunternehmen und Plattformen.",
@@ -325,11 +283,7 @@ const categoryData: Record<string, any> = {
           "Custom Development",
           "SLA Garantie"
         ],
-        tech: ["Enterprise CRM", "Multi-Office", "Analytics", "API"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop"
-        ]
+        tech: ["Enterprise CRM", "Multi-Office", "Analytics", "API"]
       }
     ]
   },
@@ -340,9 +294,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-portfolio",
         name: "Onepager Portfolio",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Freelancer und kleine Portfolios.",
@@ -354,18 +306,12 @@ const categoryData: Record<string, any> = {
           "Grundlegende SEO",
           "Mobile-optimiert"
         ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Portfolio Gallery"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop"
-        ]
+        tech: ["HTML5", "CSS3", "JavaScript", "Portfolio Gallery"]
       },
       {
         id: "business-portfolio",
         name: "Business Portfolio",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop",
         description: "Vollständige Portfolio-Website mit mehreren Projekten und Services.",
@@ -379,18 +325,12 @@ const categoryData: Record<string, any> = {
           "Social Media",
           "Testimonials"
         ],
-        tech: ["React", "Portfolio CMS", "Blog", "Testimonials"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop"
-        ]
+        tech: ["React", "Portfolio CMS", "Blog", "Testimonials"]
       },
       {
         id: "premium-portfolio",
         name: "Premium Portfolio",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
         description: "Premium-Lösung für Agenturen und Kreativprofis mit erweiterten Features.",
@@ -406,18 +346,12 @@ const categoryData: Record<string, any> = {
           "Brand Guidelines",
           "Priority Support"
         ],
-        tech: ["Advanced Portfolio", "Case Studies", "Multi-Language", "Lead Gen"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-        ]
+        tech: ["Advanced Portfolio", "Case Studies", "Multi-Language", "Lead Gen"]
       },
       {
         id: "enterprise-portfolio",
         name: "Enterprise Portfolio",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1541963463532-d68292c34d19?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für große Agenturen und Unternehmen.",
@@ -433,11 +367,7 @@ const categoryData: Record<string, any> = {
           "Custom Development",
           "SLA Garantie"
         ],
-        tech: ["Enterprise CMS", "Multi-Brand", "Analytics", "API"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1541963463532-d68292c34d19?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-        ]
+        tech: ["Enterprise CMS", "Multi-Brand", "Analytics", "API"]
       }
     ]
   },
@@ -448,9 +378,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-corporate",
         name: "Onepager Corporate",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Unternehmenspräsentation.",
@@ -462,18 +390,12 @@ const categoryData: Record<string, any> = {
           "Grundlegende SEO",
           "Mobile-optimiert"
         ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Corporate Design"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=600&fit=crop"
-        ]
+        tech: ["HTML5", "CSS3", "JavaScript", "Corporate Design"]
       },
       {
         id: "business-corporate",
         name: "Business Corporate",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=600&fit=crop",
         description: "Vollständige Unternehmenswebsite mit mehreren Bereichen.",
@@ -487,18 +409,12 @@ const categoryData: Record<string, any> = {
           "Social Media",
           "Karriere"
         ],
-        tech: ["React", "Corporate CMS", "Blog", "Careers"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop"
-        ]
+        tech: ["React", "Corporate CMS", "Blog", "Careers"]
       },
       {
         id: "premium-corporate",
         name: "Premium Corporate",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
         description: "Premium-Lösung für etablierte Unternehmen mit erweiterten Features.",
@@ -514,18 +430,12 @@ const categoryData: Record<string, any> = {
           "Brand Guidelines",
           "Priority Support"
         ],
-        tech: ["Executive Design", "Multi-Language", "Investor Relations", "Press Center"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop"
-        ]
+        tech: ["Executive Design", "Multi-Language", "Investor Relations", "Press Center"]
       },
       {
         id: "enterprise-corporate",
         name: "Enterprise Corporate",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für Konzerne und Großunternehmen.",
@@ -541,11 +451,7 @@ const categoryData: Record<string, any> = {
           "Custom Development",
           "SLA Garantie"
         ],
-        tech: ["Global Enterprise", "Intranet", "Compliance", "Multi-Brand"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop"
-        ]
+        tech: ["Global Enterprise", "Intranet", "Compliance", "Multi-Brand"]
       }
     ]
   },
@@ -556,9 +462,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-startup",
         name: "Onepager Startup",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Startup-Produktvorstellung.",
@@ -570,18 +474,12 @@ const categoryData: Record<string, any> = {
           "Grundlegende SEO",
           "Mobile-optimiert"
         ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Startup Design"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
-        ]
+        tech: ["HTML5", "CSS3", "JavaScript", "Startup Design"]
       },
       {
         id: "business-startup",
         name: "Business Startup",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
         description: "Vollständige Startup-Website mit Produkt-Launch und Team-Präsentation.",
@@ -595,18 +493,12 @@ const categoryData: Record<string, any> = {
           "Social Media",
           "Newsletter"
         ],
-        tech: ["React", "Launch Page", "Investment Portal", "Blog"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop"
-        ]
+        tech: ["React", "Launch Page", "Investment Portal", "Blog"]
       },
       {
         id: "premium-startup",
         name: "Premium Startup",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
         description: "Premium-Lösung für Scale-ups mit erweiterten Investment-Features.",
@@ -622,18 +514,12 @@ const categoryData: Record<string, any> = {
           "Brand Guidelines",
           "Priority Support"
         ],
-        tech: ["Scale-up Stack", "Investor Portal", "Multi-Language", "Lead Gen"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1515378791036-0648a814c963?w=800&h=600&fit=crop"
-        ]
+        tech: ["Scale-up Stack", "Investor Portal", "Multi-Language", "Lead Gen"]
       },
       {
         id: "enterprise-startup",
         name: "Enterprise Startup",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für etablierte Tech-Unternehmen und Unicorns.",
@@ -649,198 +535,115 @@ const categoryData: Record<string, any> = {
           "Custom Development",
           "SLA Garantie"
         ],
-        tech: ["SaaS Platform", "API Docs", "Multi-Product", "Enterprise Analytics"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1515378791036-0648a814c963?w=800&h=600&fit=crop"
-        ]
+        tech: ["SaaS Platform", "API Docs", "Multi-Product", "Enterprise Analytics"]
       }
     ]
   }
 };
 
-export default function TemplateDetail() {
-  const { category, template } = useParams();
+export default function TemplateCategory() {
+  const { category } = useParams<{ category: string }>();
   const data = category ? categoryData[category] : null;
-  const templateData = data?.templates?.find((t: any) => t.id === template);
 
-  if (!data || !templateData) {
+  if (!data) {
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-heading font-bold mb-4">Template nicht gefunden</h1>
-          <Link to={`/templates/${category}`}>
-            <Button>Zurück zur Kategorie</Button>
+          <h1 className="text-4xl font-heading font-bold mb-4">Kategorie nicht gefunden</h1>
+          <Link to="/templates">
+            <Button>Zurück zur Übersicht</Button>
           </Link>
         </div>
       </div>
     );
   }
 
-  const getLevelIcon = (level: string) => {
-    switch (level) {
-      case 'onepager': return <Smartphone className="w-6 h-6" />;
-      case 'business': return <Globe className="w-6 h-6" />;
-      case 'premium': return <Palette className="w-6 h-6" />;
-      case 'enterprise': return <Shield className="w-6 h-6" />;
-      default: return <Globe className="w-6 h-6" />;
-    }
-  };
-
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case 'onepager': return 'bg-green-100 text-green-800 border-green-200';
-      case 'business': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'premium': return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'enterprise': return 'bg-red-100 text-red-800 border-red-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
   return (
     <div className="min-h-screen pt-24 pb-20">
       <div className="container mx-auto px-4">
-        <Link
-          to={`/templates/${category}`}
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors"
-        >
+        <Link to="/templates" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4" />
-          Zurück zur Kategorie
+          Zurück zur Übersicht
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Screenshots Gallery */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="space-y-4">
-              <Card className="overflow-hidden border-primary/20">
-                <img
-                  src={templateData.image}
-                  alt={templateData.name}
-                  className="w-full h-auto"
-                />
-              </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <h1 className="text-5xl md:text-6xl font-heading font-bold mb-4 text-gradient-gold">
+            {data.emoji} {data.name} Lösungen
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            Alle Service-Stufen für {data.name} - von Onepager bis Enterprise
+          </p>
+        </motion.div>
 
-              {templateData.screenshots && templateData.screenshots.length > 1 && (
-                <div className="grid grid-cols-2 gap-4">
-                  {templateData.screenshots.slice(1, 3).map((screenshot: string, index: number) => (
-                    <Card key={index} className="overflow-hidden border-primary/20">
-                      <img
-                        src={screenshot}
-                        alt={`${templateData.name} Screenshot ${index + 2}`}
-                        className="w-full h-32 object-cover"
-                      />
-                    </Card>
-                  ))}
-                </div>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Details */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-4">
-              <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border ${getLevelColor(templateData.level)} mb-4`}>
-                {getLevelIcon(templateData.level)}
-                {templateData.level.charAt(0).toUpperCase() + templateData.level.slice(1)}
-              </span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient-gold">
-              {templateData.name}
-            </h1>
-
-            {/* Preis-Bereich mit Rabatt */}
-            <div className="mb-6">
-              {/* Rabatt-Badge */}
-              <div className="mb-2">
-                <span className="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-sm font-bold rounded-full border border-red-200">
-                  🔥 -{templateData.discount}% RABATT
-                </span>
-              </div>
-
-              {/* Neuer Preis in Rot mit "statt" Hinweis */}
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="text-3xl font-numeric font-bold text-red-600">
-                  €{templateData.price}
-                </span>
-                <span className="text-sm text-muted-foreground font-medium">
-                  statt €{templateData.originalPrice}
-                </span>
-              </div>
-            </div>
-
-            <p className="text-muted-foreground mb-8 text-lg">
-              {templateData.description}
-            </p>
-
-            <div className="mb-8">
-              <h2 className="text-2xl font-heading font-bold mb-4">Features</h2>
-              <div className="grid grid-cols-1 gap-3">
-                {templateData.features.map((feature: string, index: number) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-muted-foreground">{feature}</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {data.templates.map((template: Template, index: number) => (
+            <motion.div
+              key={template.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Link to={`/templates/${category}/${template.id}`}>
+                <Card className="overflow-hidden hover-lift cursor-pointer border-primary/20 h-full">
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={template.image}
+                      alt={template.name}
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                    <div className="absolute top-4 right-4">
+                      <span className="px-3 py-1 bg-primary/20 backdrop-blur-sm rounded-full text-sm font-medium text-primary">
+                        {template.level.charAt(0).toUpperCase() + template.level.slice(1)}
+                      </span>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            <div className="mb-8">
-              <h2 className="text-2xl font-heading font-bold mb-4">Technologien</h2>
-              <div className="flex flex-wrap gap-2">
-                {templateData.tech.map((tech: string, index: number) => (
-                  <span key={index} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-heading font-bold mb-2">{template.name}</h3>
 
-            <div className="flex gap-4">
-              <Link to="/kontakt" className="flex-1">
-                <Button size="lg" className="w-full bg-primary hover:bg-primary/90 shadow-gold">
-                  Jetzt bestellen
-                </Button>
+                    {/* Preis-Bereich mit Rabatt */}
+                    <div className="mb-4">
+                      {/* Durchgestrichener Original-Preis */}
+                      <div className="mb-2">
+                        <span className="text-lg font-numeric font-bold text-gradient-gold line-through opacity-75">
+                          €{template.originalPrice}
+                        </span>
+                      </div>
+
+                      {/* Rabatt-Badge */}
+                      <div className="mb-2">
+                        <span className="inline-flex items-center px-2 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-full border border-red-200">
+                          🔥 -{template.discount}% RABATT
+                        </span>
+                      </div>
+
+                      {/* Neuer Preis in Rot */}
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-2xl font-numeric font-bold text-red-600">
+                          €{template.price}
+                        </span>
+                        <span className="text-sm text-muted-foreground font-medium">
+                          statt €{template.originalPrice}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-4">
+                      <Button variant="outline" size="sm">
+                        Details ansehen →
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
               </Link>
-              <Button size="lg" variant="outline" className="flex-1">
-                Live Demo anfragen
-              </Button>
-            </div>
-
-            <Card className="mt-8 p-6 glass-card border-gold/20">
-              <h3 className="font-heading font-bold mb-2">✨ Inklusive Leistungen</h3>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>Responsive Design für alle Geräte</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>SEO-Optimierung & Performance</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>1 Jahr kostenloser Support</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>DSGVO-konform & Sicher</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-green-500" />
-                  <span>Schnelle Ladezeiten & Optimierung</span>
-                </div>
-              </div>
-            </Card>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

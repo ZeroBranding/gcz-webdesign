@@ -8,63 +8,96 @@ import { useCart } from "@/contexts/CartContext";
 const packages = [
   {
     name: "Onepager",
+    originalPrice: 799,
     price: 49,
-    description: "Perfekt für Einsteiger",
+    discount: 93.87,
+    description: "Einfache One-Page-Lösung für kleine Unternehmen",
     features: [
-      "1 Seite, klares Layout",
-      "Responsive Design",
-      "Kontaktformular",
-      "Basis-SEO",
-      "Performance A",
+      "Responsive One-Page Design",
+      "Kontaktformular & Impressum",
+      "Grundlegende SEO-Optimierung",
+      "Mobile-optimiert",
+      "Schnelle Ladezeiten",
+      "1 Jahr Support",
     ],
   },
   {
     name: "Landing",
+    originalPrice: 1499,
     price: 99,
-    description: "Für Marketing-Kampagnen",
+    discount: 93.40,
+    description: "Vollständige Landing-Website mit erweiterten Features",
     features: [
-      "3-5 Sektionen",
-      "Premium-Animationen light",
-      "Lead-Formulare",
-      "Tracking-Setup",
-      "A/B-Testing Start",
+      "Mehrseitige Website (bis 10 Seiten)",
+      "Blog-Integration",
+      "Kontakt- & Anfrageformulare",
+      "Erweiterte SEO-Optimierung",
+      "Social Media Integration",
+      "Google Analytics Setup",
+      "Newsletter-Anmeldung",
+      "1 Jahr Premium Support",
     ],
   },
   {
     name: "Business",
+    originalPrice: 2299,
     price: 249,
-    description: "Für wachsende Unternehmen",
+    discount: 89.17,
+    description: "Premium-Lösung mit exklusivem Design und erweiterten Funktionen",
     features: [
-      "Bis 10 Seiten",
-      "Blog-Basis",
-      "Erweiterte SEO-Onpage",
-      "3 Formular-Flows",
-      "Bild-Optimierung",
+      "Premium Custom Design",
+      "Erweiterte Shop-Funktionen",
+      "CRM-Integration",
+      "Multi-Language Support",
+      "Advanced SEO & Performance",
+      "E-Mail Marketing Integration",
+      "A/B Testing Tools",
+      "Priority Support",
+      "Custom Animationen",
+      "Brand Guidelines",
     ],
     recommended: true,
   },
   {
     name: "Pro / Agentur",
+    originalPrice: 2299,
     price: 499,
-    description: "Komplette Pro-Lösung",
+    discount: 78.25,
+    description: "Komplette Pro-Lösung für Agenturen und Profis",
     features: [
-      "Bis 20 Seiten",
-      "CMS-Integration light",
-      "Performance-kritisch",
-      "Prior-Support 3 Monate",
-      "Skalierbare Komponenten",
+      "Enterprise-Grade Architektur",
+      "Multi-Store Management",
+      "API Integration",
+      "Advanced Analytics",
+      "Custom Backend",
+      "Load Balancing",
+      "Security Hardening",
+      "24/7 Monitoring",
+      "White-Label Lösung",
+      "Dedicated Support Team",
+      "Custom Development",
+      "SLA Garantie",
     ],
   },
   {
     name: "Enterprise",
+    originalPrice: 3499,
     price: 999,
-    description: "Individuelle Enterprise-Lösung",
+    discount: 71.45,
+    description: "Enterprise-Lösung für große Unternehmen und Konzerne",
     features: [
-      "Individuelle IA",
-      "Komplexe Komponenten",
-      "Strukturierte Inhalte",
-      "Prior-Support 6 Monate",
-      "Full-Service",
+      "Enterprise-Grade Architektur",
+      "Multi-Store Management",
+      "API Integration",
+      "Advanced Analytics",
+      "Custom Backend",
+      "Load Balancing",
+      "Security Hardening",
+      "24/7 Monitoring",
+      "White-Label Lösung",
+      "Dedicated Support Team",
+      "Custom Development",
+      "SLA Garantie",
     ],
   },
 ];
@@ -172,9 +205,20 @@ export default function Preise() {
                 </div>
 
                 <div className="mb-6">
+                  <div className="mb-3">
+                    {/* Rabatt-Badge */}
+                    <span className="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-sm font-bold rounded-full border border-red-200">
+                      🔥 -{pkg.discount}% RABATT
+                    </span>
+                  </div>
+
+                  {/* Neuer Preis in Rot mit "statt" Hinweis */}
                   <div className="flex items-baseline gap-2">
-                    <span className="text-4xl font-numeric font-bold text-gradient-gold">
+                    <span className="text-4xl font-numeric font-bold text-red-600">
                       €{pkg.price}
+                    </span>
+                    <span className="text-sm text-muted-foreground font-medium">
+                      statt €{pkg.originalPrice}
                     </span>
                   </div>
                 </div>

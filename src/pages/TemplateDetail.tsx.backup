@@ -124,9 +124,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-gastronomie",
         name: "Onepager Gastronomie",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Restaurants mit Speisekarte und Reservierung.",
@@ -147,9 +145,7 @@ const categoryData: Record<string, any> = {
       {
         id: "business-gastronomie",
         name: "Business Gastronomie",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop",
         description: "Vollständige Restaurant-Website mit mehreren Seiten und erweiterten Funktionen.",
@@ -172,9 +168,7 @@ const categoryData: Record<string, any> = {
       {
         id: "premium-gastronomie",
         name: "Premium Gastronomie",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
         description: "Premium-Lösung für gehobene Gastronomie mit exklusiven Features.",
@@ -199,9 +193,7 @@ const categoryData: Record<string, any> = {
       {
         id: "enterprise-gastronomie",
         name: "Enterprise Gastronomie",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für Restaurant-Ketten und große Gastronomiebetriebe.",
@@ -232,9 +224,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-immobilien",
         name: "Onepager Immobilien",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Immobilienmakler mit Objektpräsentation.",
@@ -255,9 +245,7 @@ const categoryData: Record<string, any> = {
       {
         id: "business-immobilien",
         name: "Business Immobilien",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
         description: "Vollständige Makler-Website mit Portfolio und erweiterten Features.",
@@ -280,9 +268,7 @@ const categoryData: Record<string, any> = {
       {
         id: "premium-immobilien",
         name: "Premium Immobilien",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
         description: "Premium-Lösung für Luxusimmobilien mit exklusivem Design.",
@@ -307,9 +293,7 @@ const categoryData: Record<string, any> = {
       {
         id: "enterprise-immobilien",
         name: "Enterprise Immobilien",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für große Immobilienunternehmen und Plattformen.",
@@ -340,9 +324,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-portfolio",
         name: "Onepager Portfolio",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Freelancer und kleine Portfolios.",
@@ -363,9 +345,7 @@ const categoryData: Record<string, any> = {
       {
         id: "business-portfolio",
         name: "Business Portfolio",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop",
         description: "Vollständige Portfolio-Website mit mehreren Projekten und Services.",
@@ -388,9 +368,7 @@ const categoryData: Record<string, any> = {
       {
         id: "premium-portfolio",
         name: "Premium Portfolio",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
         description: "Premium-Lösung für Agenturen und Kreativprofis mit erweiterten Features.",
@@ -415,9 +393,7 @@ const categoryData: Record<string, any> = {
       {
         id: "enterprise-portfolio",
         name: "Enterprise Portfolio",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1541963463532-d68292c34d19?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für große Agenturen und Unternehmen.",
@@ -448,9 +424,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-corporate",
         name: "Onepager Corporate",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Unternehmenspräsentation.",
@@ -471,9 +445,7 @@ const categoryData: Record<string, any> = {
       {
         id: "business-corporate",
         name: "Business Corporate",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=600&fit=crop",
         description: "Vollständige Unternehmenswebsite mit mehreren Bereichen.",
@@ -496,9 +468,7 @@ const categoryData: Record<string, any> = {
       {
         id: "premium-corporate",
         name: "Premium Corporate",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
         description: "Premium-Lösung für etablierte Unternehmen mit erweiterten Features.",
@@ -523,9 +493,7 @@ const categoryData: Record<string, any> = {
       {
         id: "enterprise-corporate",
         name: "Enterprise Corporate",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für Konzerne und Großunternehmen.",
@@ -556,9 +524,7 @@ const categoryData: Record<string, any> = {
       {
         id: "onepager-startup",
         name: "Onepager Startup",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
+        price: 799,
         level: "onepager",
         image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=600&fit=crop",
         description: "Einfache One-Page-Lösung für Startup-Produktvorstellung.",
@@ -579,9 +545,7 @@ const categoryData: Record<string, any> = {
       {
         id: "business-startup",
         name: "Business Startup",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
+        price: 1499,
         level: "business",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
         description: "Vollständige Startup-Website mit Produkt-Launch und Team-Präsentation.",
@@ -604,9 +568,7 @@ const categoryData: Record<string, any> = {
       {
         id: "premium-startup",
         name: "Premium Startup",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 2299,
         level: "premium",
         image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
         description: "Premium-Lösung für Scale-ups mit erweiterten Investment-Features.",
@@ -631,9 +593,7 @@ const categoryData: Record<string, any> = {
       {
         id: "enterprise-startup",
         name: "Enterprise Startup",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        price: 3499,
         level: "enterprise",
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
         description: "Enterprise-Lösung für etablierte Tech-Unternehmen und Unicorns.",
@@ -759,6 +719,13 @@ export default function TemplateDetail() {
 
             {/* Preis-Bereich mit Rabatt */}
             <div className="mb-6">
+              {/* Durchgestrichener Original-Preis */}
+              <div className="mb-3">
+                <span className="text-lg font-numeric font-bold text-gradient-gold line-through opacity-75">
+                  €{templateData.originalPrice}
+                </span>
+              </div>
+
               {/* Rabatt-Badge */}
               <div className="mb-2">
                 <span className="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-sm font-bold rounded-full border border-red-200">
@@ -766,7 +733,7 @@ export default function TemplateDetail() {
                 </span>
               </div>
 
-              {/* Neuer Preis in Rot mit "statt" Hinweis */}
+              {/* Neuer Preis in Rot */}
               <div className="flex items-baseline gap-2 mb-4">
                 <span className="text-3xl font-numeric font-bold text-red-600">
                   €{templateData.price}

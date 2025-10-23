@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
@@ -9,7 +10,7 @@ const templateCategories = [
     name: "E-Commerce",
     emoji: "🛒",
     description: "Professionelle Online-Shops mit Zahlungsintegration",
-    count: 12,
+    count: 4,
     image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=600&fit=crop",
   },
   {
@@ -17,7 +18,7 @@ const templateCategories = [
     name: "Gastronomie",
     emoji: "🍽️",
     description: "Appetitliche Websites für Restaurants und Cafés",
-    count: 8,
+    count: 4,
     image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
   },
   {
@@ -25,7 +26,7 @@ const templateCategories = [
     name: "Immobilien",
     emoji: "🏢",
     description: "Elegante Präsentationen für Immobilienmakler",
-    count: 10,
+    count: 4,
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
   },
   {
@@ -33,7 +34,7 @@ const templateCategories = [
     name: "Portfolio",
     emoji: "💼",
     description: "Beeindruckende Portfolios für Kreative",
-    count: 15,
+    count: 4,
     image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop",
   },
   {
@@ -41,16 +42,16 @@ const templateCategories = [
     name: "Corporate",
     emoji: "🏛️",
     description: "Professionelle Unternehmenswebsites",
-    count: 9,
+    count: 4,
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
   },
   {
     id: "startup",
     name: "Startup",
     emoji: "🚀",
-    description: "Innovative Designs für junge Unternehmen",
-    count: 11,
-    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop",
+    description: "Innovative Websites für Startups und Tech-Unternehmen",
+    count: 4,
+    image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=600&fit=crop",
   },
 ];
 
@@ -58,23 +59,20 @@ export default function Templates() {
   return (
     <div className="min-h-screen pt-24 pb-20">
       <div className="container mx-auto px-4">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 text-gradient-gold">
-            Template Übersicht
+          <h1 className="text-5xl md:text-6xl font-heading font-bold mb-4 text-gradient-gold">
+            🎨 Templates
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Entdecken Sie unsere handverlesene Auswahl an professionellen Website-Templates
-            für jede Branche
+          <p className="text-xl text-muted-foreground">
+            Professionelle Website-Templates für jede Branche
           </p>
         </motion.div>
 
-        {/* Template Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {templateCategories.map((category, index) => (
             <motion.div
@@ -92,24 +90,23 @@ export default function Templates() {
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                    <div className="absolute top-4 right-4 text-4xl animate-float">
-                      {category.emoji}
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <h3 className="text-2xl font-heading font-bold mb-2 text-gradient-gold">
-                      {category.name}
-                    </h3>
-                    <p className="text-muted-foreground mb-4 font-body">
-                      {category.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">
+                    <div className="absolute top-4 right-4">
+                      <span className="px-3 py-1 bg-primary/20 backdrop-blur-sm rounded-full text-sm font-medium text-primary">
                         {category.count} Templates
                       </span>
-                      <Button variant="ghost" size="sm" className="text-primary">
-                        Entdecken →
+                    </div>
+                  </div>
+
+                  <div className="p-6">
+                    <div className="text-3xl mb-2">{category.emoji}</div>
+                    <h3 className="text-xl font-heading font-bold mb-2">{category.name}</h3>
+                    <p className="text-muted-foreground mb-4">{category.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">
+                        {category.count} Service-Stufen
+                      </span>
+                      <Button variant="outline" size="sm">
+                        Templates ansehen →
                       </Button>
                     </div>
                   </div>
@@ -119,27 +116,45 @@ export default function Templates() {
           ))}
         </div>
 
-        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20 text-center"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-center mt-16"
         >
-          <Card className="p-12 glass-card border-gold/30 max-w-3xl mx-auto">
-            <h2 className="text-3xl font-heading font-bold mb-4 text-gradient-luxury">
-              Ihr Template nicht dabei?
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              Wir erstellen auch individuelle Designs genau nach Ihren Vorstellungen
-            </p>
-            <Link to="/kontakt">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-gold">
-                Individuelles Angebot anfordern
-              </Button>
-            </Link>
-          </Card>
+          <h2 className="text-3xl font-heading font-bold mb-4">Alle Templates beinhalten</h2>
+          <p className="text-muted-foreground mb-8">
+            Jede Service-Stufe kommt mit professionellem Design, SEO-Optimierung und mobile Responsiveness
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">📱</span>
+              </div>
+              <h3 className="font-heading font-bold mb-2">Responsive Design</h3>
+              <p className="text-sm text-muted-foreground">
+                Perfekt auf allen Geräten - Desktop, Tablet und Mobile
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">⚡</span>
+              </div>
+              <h3 className="font-heading font-bold mb-2">Performance Optimiert</h3>
+              <p className="text-sm text-muted-foreground">
+                Schnelle Ladezeiten und optimierte Bilder
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🔒</span>
+              </div>
+              <h3 className="font-heading font-bold mb-2">Sicher & DSGVO</h3>
+              <p className="text-sm text-muted-foreground">
+                Datenschutzkonform und sicher für alle Anforderungen
+              </p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </div>
