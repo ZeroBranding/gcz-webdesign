@@ -38,10 +38,17 @@ export const Navigation = () => {
             />
           </Link>
 
-          {/* Right: Language, Cart Total, Cart Button, Theme, Menu */}
+          {/* Right: Home Button, Language, Cart Total, Cart Button, Theme, Menu */}
           <div className="flex items-center gap-3">
+            {/* Startseite Button */}
+            <Link to="/">
+              <Button variant="ghost" size="sm" className="hidden md:flex hover-lift">
+                🏠 Startseite
+              </Button>
+            </Link>
+
             <LanguageSelector />
-            
+
             <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
               <span className="text-sm font-numeric font-bold text-gradient-gold">
                 €{total}
