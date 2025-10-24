@@ -96,7 +96,7 @@ export const Navigation = () => {
           <div className="absolute left-1/2 -translate-x-1/2">
             <FireText 
               text="Webdesign Fabrik" 
-              className="text-2xl lg:text-3xl font-heading fire-glow-nav"
+              className="text-2xl lg:text-3xl font-heading"
             />
           </div>
 
