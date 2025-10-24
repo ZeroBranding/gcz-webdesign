@@ -1,0 +1,159 @@
+{
+  "e-commerce": {
+    "id": "e-commerce",
+    "name": "E-Commerce",
+    "description": "Professionelle Online-Shops für erfolgreichen Verkauf",
+    "icon": "🛒",
+    "originalPrice": 999,
+    "price": 49,
+    "discount": 95,
+    "level": "premium",
+    "image": "/templates/ecommerce-preview.jpg",
+    "features": [
+      "Responsive Design",
+      "Warenkorb-Funktion",
+      "Zahlungsintegration",
+      "Produkt-Management",
+      "SEO-Optimierung",
+      "Admin-Panel"
+    ],
+    "tech": ["React", "Node.js", "Stripe", "MongoDB"],
+    "templates": [
+      {
+        "id": "shop-basic",
+        "name": "Shop Basic",
+        "description": "Einfacher Online-Shop für kleine Unternehmen",
+        "price": 49,
+        "originalPrice": 499,
+        "discount": 90,
+        "level": "basic",
+        "image": "/templates/shop-basic.jpg",
+        "features": ["Produkt-Katalog", "Warenkorb", "Kontaktformular"],
+        "tech": ["React", "CSS3", "JavaScript"],
+        "category": "e-commerce"
+      },
+      {
+        "id": "shop-professional",
+        "name": "Shop Professional",
+        "description": "Vollständiger Online-Shop mit erweiterten Features",
+        "price": 199,
+        "originalPrice": 1299,
+        "discount": 85,
+        "level": "professional",
+        "image": "/templates/shop-professional.jpg",
+        "features": ["Alle Basic Features", "Zahlung", "Bestell-Management", "Kunden-Login"],
+        "tech": ["React", "Node.js", "Stripe", "Database"],
+        "category": "e-commerce"
+      },
+      {
+        "id": "shop-enterprise",
+        "name": "Shop Enterprise",
+        "description": "Enterprise E-Commerce Lösung mit allen Features",
+        "price": 399,
+        "originalPrice": 2499,
+        "discount": 84,
+        "level": "enterprise",
+        "image": "/templates/shop-enterprise.jpg",
+        "features": ["Alle Professional Features", "Multi-Store", "API-Integration", "Analytics"],
+        "tech": ["Next.js", "TypeScript", "Enterprise Stack", "Cloud"],
+        "category": "e-commerce"
+      }
+    ]
+  },
+  "gastronomie": {
+    "id": "gastronomie",
+    "name": "Gastronomie",
+    "description": "Attraktive Websites für Restaurants und Cafés",
+    "icon": "🍽️",
+    "originalPrice": 799,
+    "price": 99,
+    "discount": 88,
+    "level": "professional",
+    "image": "/templates/gastronomie-preview.jpg",
+    "features": [
+      "Speisekarte Online",
+      "Reservierungs-System",
+      "Öffnungszeiten",
+      "Galerie",
+      "Kontakt & Anfahrt",
+      "Mobile-First Design"
+    ],
+    "tech": ["React", "Firebase", "Google Maps"],
+    "templates": [
+      {
+        "id": "restaurant-simple",
+        "name": "Restaurant Simple",
+        "description": "Einfache Restaurant-Website",
+        "price": 99,
+        "originalPrice": 599,
+        "discount": 83,
+        "level": "basic",
+        "image": "/templates/restaurant-simple.jpg",
+        "features": ["Speisekarte", "Kontakt", "Öffnungszeiten"],
+        "tech": ["React", "CSS3", "JavaScript"],
+        "category": "gastronomie"
+      },
+      {
+        "id": "restaurant-deluxe",
+        "name": "Restaurant Deluxe",
+        "description": "Restaurant mit Reservierung und Galerie",
+        "price": 199,
+        "originalPrice": 999,
+        "discount": 80,
+        "level": "professional",
+        "image": "/templates/restaurant-deluxe.jpg",
+        "features": ["Alle Basic Features", "Online-Reservierung", "Foto-Galerie", "Events"],
+        "tech": ["React", "Booking System", "Gallery"],
+        "category": "gastronomie"
+      }
+    ]
+  },
+  "immobilien": {
+    "id": "immobilien",
+    "name": "Immobilien",
+    "description": "Professionelle Websites für Immobilienmakler",
+    "icon": "🏠",
+    "originalPrice": 899,
+    "price": 149,
+    "discount": 83,
+    "level": "professional",
+    "image": "/templates/immobilien-preview.jpg",
+    "features": [
+      "Immobilien-Liste",
+      "Suchfilter",
+      "Virtuelle Touren",
+      "Kontaktformular",
+      "Karten-Integration",
+      "Lead-Management"
+    ],
+    "tech": ["React", "Google Maps", "Property API"],
+    "templates": [
+      {
+        "id": "real-estate-basic",
+        "name": "Real Estate Basic",
+        "description": "Immobilien-Website für Makler",
+        "price": 149,
+        "originalPrice": 699,
+        "discount": 79,
+        "level": "basic",
+        "image": "/templates/real-estate-basic.jpg",
+        "features": ["Immobilien-Liste", "Suchfilter", "Kontakt"],
+        "tech": ["React", "Google Maps", "CSS3"],
+        "category": "immobilien"
+      },
+      {
+        "id": "real-estate-pro",
+        "name": "Real Estate Pro",
+        "description": "Professionelle Immobilien-Plattform",
+        "price": 299,
+        "originalPrice": 1499,
+        "discount": 80,
+        "level": "professional",
+        "image": "/templates/real-estate-pro.jpg",
+        "features": ["Alle Basic Features", "Virtuelle Touren", "Lead-Management", "Analytics"],
+        "tech": ["React", "Virtual Tours", "CRM", "Analytics"],
+        "category": "immobilien"
+      }
+    ]
+  }
+}

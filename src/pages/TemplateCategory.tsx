@@ -7,145 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ShoppingCart, Search, Filter, Zap, Shield, Star, Clock, ArrowLeft } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { TemplateData, CategoryData } from "@/types";
-
-// Template-Daten mit korrekter Record-Struktur
-const categoryData: Record<string, CategoryData> = {
-  "e-commerce": {
-    name: "E-Commerce",
-    emoji: "🛒",
-    templates: {
-      "basic-ecommerce": {
-        id: "basic-ecommerce",
-        name: "Basic E-Commerce",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
-        level: "basic",
-        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-        description: "Einfache, aber effektive One-Page-Lösung für kleine Online-Shops mit grundlegenden Funktionen.",
-        features: [
-          "Responsive One-Page Design",
-          "Produktgalerie mit bis zu 20 Produkten",
-          "Kontaktformular mit Lead-Capture",
-          "Grundlegende SEO-Optimierung",
-          "Schnelle Ladezeiten (< 2s)",
-          "Mobile-optimiert für alle Geräte",
-          "Social Media Integration",
-          "Google Analytics Integration"
-        ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "SEO Optimized"],
-        category: "e-commerce"
-      },
-      "professional-ecommerce": {
-        id: "professional-ecommerce",
-        name: "Professional E-Commerce",
-        originalPrice: 1499,
-        price: 149,
-        discount: 90.06,
-        level: "professional",
-        image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&h=600&fit=crop",
-        description: "Vollständige Business-Website mit erweiterten Shop-Funktionen. Ideal für wachsende Unternehmen.",
-        features: [
-          "Mehrseitige Website (5+ Seiten)",
-          "Produktkatalog mit Kategorien",
-          "Blog-Integration für Content Marketing",
-          "Kontakt- & Anfrageformulare",
-          "Erweiterte SEO-Optimierung",
-          "Social Media Integration",
-          "Google Analytics & Search Console",
-          "Newsletter-Anmeldung",
-          "Warenkorb-Funktionen",
-          "Zahlungsintegration (Stripe, PayPal)"
-        ],
-        tech: ["React", "Node.js", "SEO", "Analytics", "CMS", "E-Commerce"],
-        category: "e-commerce"
-      },
-      "premium-ecommerce": {
-        id: "premium-ecommerce",
-        name: "Premium E-Commerce",
-        originalPrice: 2299,
-        price: 299,
-        discount: 87.00,
-        level: "premium",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-        description: "Premium-Lösung mit fortschrittlichen Funktionen und exklusivem Design für Marken.",
-        features: [
-          "Premium Custom Design",
-          "Erweiterte Shop-Funktionen",
-          "CRM-Integration (HubSpot, Salesforce)",
-          "Multi-Language Support (5+ Sprachen)",
-          "Advanced SEO & Performance",
-          "E-Mail Marketing Integration",
-          "A/B Testing Tools",
-          "Priority Support (24/7)",
-          "Custom Animationen",
-          "Brand Guidelines Integration",
-          "Inventory Management",
-          "Multi-Channel Sales"
-        ],
-        tech: ["Next.js", "TypeScript", "Advanced SEO", "CRM", "Multi-Language", "E-Commerce Platform"],
-        category: "e-commerce"
-      },
-      "enterprise-ecommerce": {
-        id: "enterprise-ecommerce",
-        name: "Enterprise E-Commerce",
-        originalPrice: 4999,
-        price: 1299,
-        discount: 74.01,
-        level: "enterprise",
-        image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop",
-        description: "Enterprise-Lösung für große Unternehmen mit komplexen Anforderungen und Skalierbarkeit.",
-        features: [
-          "Enterprise-Grade Architektur",
-          "Multi-Store Management",
-          "API Integration (ERP, CRM)",
-          "Advanced Analytics & Reporting",
-          "Custom Backend Development",
-          "Load Balancing & CDN",
-          "Security Hardening",
-          "24/7 Monitoring & Support",
-          "White-Label Lösung",
-          "Dedicated Account Manager",
-          "Custom Development",
-          "SLA Garantie (99.9% Uptime)",
-          "Multi-Brand Support",
-          "Global Content Delivery"
-        ],
-        tech: ["Enterprise Stack", "Microservices", "Cloud Infrastructure", "Security", "DevOps", "Global CDN"],
-        category: "e-commerce"
-      }
-    }
-  },
-  "gastronomie": {
-    name: "Gastronomie",
-    emoji: "🍽️",
-    templates: {
-      "basic-gastronomie": {
-        id: "basic-gastronomie",
-        name: "Basic Gastronomie",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
-        level: "basic",
-        image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
-        description: "Einfache One-Page-Lösung für Restaurants mit digitaler Speisekarte und Reservierung.",
-        features: [
-          "Responsive One-Page Design",
-          "Digitale Speisekarte",
-          "Online-Reservierungssystem",
-          "Kontaktinformationen",
-          "Standort & Öffnungszeiten",
-          "Mobile-optimiert",
-          "Foto-Galerie",
-          "Social Media Links"
-        ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Mobile-First", "Booking System"],
-        category: "gastronomie"
-      }
-    }
-  }
-};
+import { TemplateData } from "@/types";
+import templatesData from "@/data/templates.json";
+import serviceLevelsData from "@/data/serviceLevels.json";
 
 export default function TemplateCategory() {
   const { category } = useParams<{ category: string }>();
@@ -154,13 +18,13 @@ export default function TemplateCategory() {
   const [levelFilter, setLevelFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("name");
 
-  const data = category ? categoryData[category] : null;
+  const data = category ? templatesData[category as keyof typeof templatesData] : null;
 
   // Filter und Sortierung - useMemo vor early return
   const filteredTemplates = useMemo(() => {
     if (!data) return [];
 
-    let templates = Object.values(data.templates);
+    let templates = data.templates;
 
     // Suchfilter
     if (searchTerm) {
@@ -257,7 +121,7 @@ export default function TemplateCategory() {
           className="mb-8"
         >
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient-gold">
-            {data.emoji} {data.name} Templates
+            {data.icon} {data.name} Templates
           </h1>
           <p className="text-lg text-muted-foreground mb-6">
             Professionelle {data.name.toLowerCase()} Websites - von Basic bis Enterprise

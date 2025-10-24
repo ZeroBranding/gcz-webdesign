@@ -1,0 +1,71 @@
+{
+  "serviceLevels": {
+    "basic": {
+      "id": "basic",
+      "name": "Basic",
+      "description": "Einfache Website ohne Schnörkel",
+      "priceMultiplier": 1,
+      "features": [
+        "Responsive Design",
+        "Kontaktformular",
+        "SEO-Grundsetup",
+        "1 Jahr Hosting",
+        "SSL-Zertifikat"
+      ],
+      "deliveryTime": "1-2 Tage",
+      "revisions": 1,
+      "support": "E-Mail Support"
+    },
+    "professional": {
+      "id": "professional",
+      "name": "Professional",
+      "description": "Erweiterte Website mit Premium-Features",
+      "priceMultiplier": 2,
+      "features": [
+        "Alle Basic Features",
+        "Admin-Panel",
+        "Blog-System",
+        "Zahlungsintegration",
+        "Analytics Setup",
+        "2 Jahre Hosting"
+      ],
+      "deliveryTime": "3-5 Tage",
+      "revisions": 3,
+      "support": "Priority Support"
+    },
+    "premium": {
+      "id": "premium",
+      "name": "Premium",
+      "description": "Premium Website mit allen Features",
+      "priceMultiplier": 4,
+      "features": [
+        "Alle Professional Features",
+        "E-Commerce Integration",
+        "Multi-Language Support",
+        "API-Integrationen",
+        "Performance Optimization",
+        "3 Jahre Hosting"
+      ],
+      "deliveryTime": "1-2 Wochen",
+      "revisions": 5,
+      "support": "Priority Support + Phone"
+    },
+    "enterprise": {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "description": "Enterprise-Lösung für große Unternehmen",
+      "priceMultiplier": 8,
+      "features": [
+        "Alle Premium Features",
+        "Custom Development",
+        "Dedicated Server",
+        "24/7 Support",
+        "Training & Documentation",
+        "Lifetime Updates"
+      ],
+      "deliveryTime": "2-4 Wochen",
+      "revisions": "Unlimited",
+      "support": "Dedicated Support Manager"
+    }
+  }
+}
