@@ -8,6 +8,7 @@ import { Menu, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { LoginButton } from "@/components/auth/AuthModal";
+import { FireText } from "@/components/FireText";
 import logo from "@/assets/logo.png";
 
 export const Navigation = () => {
@@ -90,8 +91,12 @@ export const Navigation = () => {
             </Link>
           </div>
 
-          {/* Center: Empty Space */}
+          {/* Center: Webdesign Fabrik mit Feuer */}
           <div className="absolute left-1/2 -translate-x-1/2">
+            <FireText 
+              text="Webdesign Fabrik" 
+              className="text-2xl lg:text-3xl font-heading"
+            />
           </div>
 
           {/* Right: Navigation Items */}
