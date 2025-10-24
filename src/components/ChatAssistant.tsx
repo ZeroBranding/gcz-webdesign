@@ -6,14 +6,7 @@ import {
   Sparkles,
   Crown,
   Zap,
-  Minimize2,
-  Maximize2,
-  Minus,
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  User
+  Minus
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +16,6 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
-import { CSSProperties } from "react";
 
 interface Message {
   role: "user" | "assistant";
@@ -96,7 +88,7 @@ const gczKnowledge: GCZAgentKnowledge = {
 
 export const ChatAssistant = () => {
   const { user } = useAuth();
-  const [chatState, setChatState] = useState<ChatState>("open");
+  const [chatState, setChatState] = useState<ChatState>("closed");
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -109,15 +101,17 @@ export const ChatAssistant = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [chatSize, setChatSize] = useState({ width: 384, height: 600 });
   const [chatPosition, setChatPosition] = useState({ x: 0, y: 0 });
+  const [lastActivity, setLastActivity] = useState(Date.now());
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
   const dragStart = useRef({ x: 0, y: 0 });
 
-  // Load chat history from localStorage
+  // Load chat history from localStorage (nur für registrierte User)
   useEffect(() => {
+    if (!user) return;
+    
     const saved = localStorage.getItem("gcz_chat");
     if (saved) {
       try {
@@ -137,30 +131,52 @@ export const ChatAssistant = () => {
         console.error("Failed to load chat history", e);
       }
     }
-  }, []);
+  }, [user]);
 
-  // Auto-scroll to bottom
+  // Inaktivitäts-Timer: Nach 1 Stunde Inaktivität Kontext löschen (nur für nicht-registrierte)
+  useEffect(() => {
+    if (user) return; // Registrierte User behalten ihren Verlauf
+    
+    const checkInactivity = setInterval(() => {
+      const now = Date.now();
+      const oneHour = 60 * 60 * 1000;
+      
+      if (now - lastActivity > oneHour && messages.length > 1) {
+        setMessages([messages[0]]); // Nur Begrüßung behalten
+        localStorage.removeItem("gcz_chat");
+        toast.info("Chat-Verlauf wurde aufgrund von Inaktivität zurückgesetzt");
+      }
+    }, 60000); // Prüfe jede Minute
+
+    return () => clearInterval(checkInactivity);
+  }, [lastActivity, messages, user]);
+
+  // Auto-scroll to bottom bei neuen Nachrichten
   useEffect(() => {
     if (scrollRef.current && chatState === "open") {
-      setTimeout(() => {
-        scrollRef.current?.scrollTo({
-          top: scrollRef.current.scrollHeight,
-          behavior: "smooth"
-        });
-      }, 100);
+      const scrollElement = scrollRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      if (scrollElement) {
+        setTimeout(() => {
+          scrollElement.scrollTo({
+            top: scrollElement.scrollHeight,
+            behavior: "smooth"
+          });
+        }, 100);
+      }
     }
   }, [messages, chatState]);
 
-  // Save to localStorage
+  // Save to localStorage (nur für registrierte User)
   useEffect(() => {
-    if (messages.length > 1) {
+    if (messages.length > 1 && user) {
       localStorage.setItem("gcz_chat", JSON.stringify(messages.slice(1)));
     }
-  }, [messages]);
+  }, [messages, user]);
 
-  // Drag functionality
+  // Drag functionality - nur am Header
   const handleMouseDown = (e: React.MouseEvent) => {
     if (chatState !== "open") return;
+    e.preventDefault();
     setIsDragging(true);
     dragStart.current = {
       x: e.clientX - chatPosition.x,
@@ -171,9 +187,18 @@ export const ChatAssistant = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging) return;
+      e.preventDefault();
+      
+      const newX = e.clientX - dragStart.current.x;
+      const newY = e.clientY - dragStart.current.y;
+      
+      // Bildschirm-Grenzen
+      const maxX = window.innerWidth - 400;
+      const maxY = window.innerHeight - 600;
+      
       setChatPosition({
-        x: e.clientX - dragStart.current.x,
-        y: e.clientY - dragStart.current.y
+        x: Math.min(Math.max(newX, -window.innerWidth + 400), maxX),
+        y: Math.min(Math.max(newY, -window.innerHeight + 100), maxY)
       });
     };
 
@@ -183,12 +208,19 @@ export const ChatAssistant = () => {
 
     if (isDragging) {
       document.addEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
+      document.addEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = 'grabbing';
+      document.body.style.userSelect = 'none';
+    } else {
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
     }
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
     };
   }, [isDragging]);
 
@@ -377,6 +409,7 @@ ${gczKnowledge.company.address}
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
+    setLastActivity(Date.now()); // Aktivität aktualisieren
 
     // Generate intelligent response
     try {
@@ -419,16 +452,19 @@ ${gczKnowledge.company.address}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         className="fixed bottom-6 right-6 z-50"
       >
         <Button
           onClick={openChat}
-          className="h-16 w-16 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 shadow-2xl hover:shadow-3xl transition-all duration-300 group"
+          className="h-16 w-16 rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-600 hover:to-yellow-700 shadow-2xl hover:shadow-3xl transition-all duration-300 group relative overflow-hidden"
           size="icon"
         >
-          <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+          <div className="relative z-10">
             <MessageCircle className="h-8 w-8 text-white group-hover:scale-110 transition-transform" />
-            <Crown className="h-4 h-4 text-yellow-200 absolute -top-1 -right-1 animate-pulse" />
+            <Crown className="h-4 w-4 text-yellow-200 absolute -top-1 -right-1 animate-pulse" />
           </div>
         </Button>
       </motion.div>
@@ -450,24 +486,28 @@ ${gczKnowledge.company.address}
               <span className="text-yellow-900 font-medium text-sm">GCZ-Agent</span>
               <Badge className="bg-green-500 text-white text-xs">Online</Badge>
             </div>
-            <div className="flex gap-1">
-              <Button
-                onClick={maximizeChat}
-                variant="ghost"
-                size="icon"
-                className="h-6 w-6 text-yellow-900 hover:bg-yellow-400"
-              >
-                <Maximize2 className="h-3 w-3" />
-              </Button>
-              <Button
-                onClick={closeChat}
-                variant="ghost"
-                size="icon"
-                className="h-6 w-6 text-yellow-900 hover:bg-yellow-400"
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </div>
+              <div className="flex gap-1">
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <Button
+                    onClick={maximizeChat}
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 text-yellow-900 hover:bg-yellow-400/50 rounded-full transition-all"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <Button
+                    onClick={closeChat}
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 text-yellow-900 hover:bg-red-400/50 rounded-full transition-all"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </motion.div>
+              </div>
           </div>
         </Card>
       </motion.div>
@@ -484,21 +524,19 @@ ${gczKnowledge.company.address}
           y: 0,
           scale: 1,
           x: chatPosition.x,
-          y: chatPosition.y,
           transition: {
             type: "spring",
-            stiffness: 300,
-            damping: 30,
-            delay: 2
+            stiffness: 260,
+            damping: 20
           }
         }}
         exit={{ opacity: 0, y: 100, scale: 0.8 }}
         className="fixed bottom-6 right-6 z-50"
         style={{
-          width: `${chatSize.width}px`,
-          height: `${chatSize.height}px`,
-          cursor: isDragging ? 'grabbing' : 'grab'
-        } as CSSProperties}
+          width: "400px",
+          height: "600px",
+          transform: `translate(${chatPosition.x}px, ${chatPosition.y}px)`
+        }}
       >
         <Card className="w-full h-full shadow-2xl border-2 border-gold bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl overflow-hidden">
           {/* Gold Header */}
@@ -528,22 +566,26 @@ ${gczKnowledge.company.address}
 
               {/* Controls */}
               <div className="flex gap-1">
-                <Button
-                  onClick={minimizeChat}
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-yellow-900 hover:bg-yellow-300/50 rounded-full"
-                >
-                  <Minus className="h-4 w-4" />
-                </Button>
-                <Button
-                  onClick={closeChat}
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-yellow-900 hover:bg-yellow-300/50 rounded-full"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
+                <motion.div whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.9 }}>
+                  <Button
+                    onClick={minimizeChat}
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-yellow-900 hover:bg-yellow-400/60 rounded-full transition-all"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.15, rotate: 90 }} whileTap={{ scale: 0.9 }}>
+                  <Button
+                    onClick={closeChat}
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-yellow-900 hover:bg-red-400/60 rounded-full transition-all"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </motion.div>
               </div>
             </div>
           </div>

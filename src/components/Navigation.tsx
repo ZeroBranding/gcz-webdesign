@@ -4,10 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { Menu, X, ShoppingCart, Sun, Moon } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
-import { ContrastSlider } from "@/components/ContrastSlider";
 import { LoginButton } from "@/components/auth/AuthModal";
 import logo from "@/assets/logo.png";
 
@@ -69,9 +68,13 @@ export const Navigation = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-md bg-background/80">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Left: Contrast Slider */}
-          <div className="hidden lg:block min-w-[200px]">
-            <ContrastSlider />
+          {/* Left: Startseite Button */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link to="/">
+              <Button variant="ghost" size="sm" className="hover-lift">
+                🏠 Startseite
+              </Button>
+            </Link>
           </div>
 
           {/* Center: Logo with Animation */}
@@ -87,13 +90,6 @@ export const Navigation = () => {
 
           {/* Right: Navigation Items */}
           <div className="flex items-center gap-3">
-            {/* Startseite Button */}
-            <Link to="/">
-              <Button variant="ghost" size="sm" className="hidden md:flex hover-lift">
-                🏠 Startseite
-              </Button>
-            </Link>
-
             <LanguageSelector />
 
             <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">

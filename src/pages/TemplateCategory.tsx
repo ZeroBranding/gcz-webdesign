@@ -91,7 +91,7 @@ export default function TemplateCategory() {
     }
   };
 
-  const handleAddToCart = (template: TemplateData) => {
+  const handleAddToCart = (template: any) => {
     addItem({
       id: template.id,
       name: template.name,
@@ -201,8 +201,8 @@ export default function TemplateCategory() {
 
                     {/* Level Badge */}
                     <div className="absolute top-3 right-3">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getLevelColor(template.level)}`}>
-                        {getLevelIcon(template.level)}
+                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border ${getLevelColor(template.level as any)}`}>
+                        {getLevelIcon(template.level as any)}
                         {template.level.charAt(0).toUpperCase() + template.level.slice(1)}
                       </span>
                     </div>
