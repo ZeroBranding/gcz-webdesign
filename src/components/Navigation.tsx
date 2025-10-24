@@ -103,7 +103,7 @@ export const Navigation = () => {
               className="text-2xl lg:text-3xl font-heading"
               ariaLabel="Webdesign Fabrik - German Code Zero"
               priority="high"
-              variant="hologram"
+              variant="quantum"
               intensity="high"
               glow={true}
               animated={true}

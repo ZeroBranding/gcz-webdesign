@@ -32,43 +32,56 @@ export const HologramShowcase: React.FC<HologramShowcaseProps> = ({ className = 
           <p className="text-sm text-muted-foreground">Realistisches Lagerfeuer mit 60fps Animationen</p>
         </div>
 
-        {/* Hologram Effect */}
-        <div className="text-center p-6 bg-gradient-to-br from-hologram-primary/10 via-background to-hologram-secondary/10 rounded-xl border border-hologram-primary/30">
+        {/* Quantum Hologram Effect */}
+        <div className="text-center p-6 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-yellow-500/10 rounded-xl border border-cyan-500/30">
           <FireText
-            text="Hologram Matrix"
+            text="Quantum Matrix"
             className="text-3xl font-heading mb-2"
-            variant="hologram"
+            variant="quantum"
             intensity="high"
             glow={true}
             animated={true}
           />
-          <p className="text-sm text-muted-foreground">Cyber-punk holographischer Text-Effekt</p>
+          <p className="text-sm text-muted-foreground">Quantum Partikel mit multidimensionalen Effekten</p>
         </div>
 
-        {/* Cyber Effect */}
-        <div className="text-center p-6 bg-gradient-to-br from-cyber/10 via-background to-neon/10 rounded-xl border border-cyber/30">
+        {/* Matrix Code Effect */}
+        <div className="text-center p-6 bg-gradient-to-br from-green-500/10 via-black to-green-500/10 rounded-xl border border-green-500/30">
           <FireText
-            text="Cyber Flow"
+            text="Matrix Code"
             className="text-3xl font-heading mb-2"
-            variant="cyber"
+            variant="matrix"
             intensity="high"
             glow={true}
             animated={true}
           />
-          <p className="text-sm text-muted-foreground">Dynamischer Cyber-Flow mit Neon-Glow</p>
+          <p className="text-sm text-muted-foreground">Falling Matrix Code mit 60fps Animation</p>
         </div>
 
-        {/* Neon Effect */}
-        <div className="text-center p-6 bg-gradient-to-br from-neon/10 via-background to-accent/10 rounded-xl border border-neon/30">
+        {/* Plasma Flow Effect */}
+        <div className="text-center p-6 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-blue-500/10 rounded-xl border border-pink-500/30">
           <FireText
-            text="Neon Pulse"
+            text="Plasma Flow"
             className="text-3xl font-heading mb-2"
-            variant="neon"
+            variant="plasma"
             intensity="high"
             glow={true}
             animated={true}
           />
-          <p className="text-sm text-muted-foreground">Pulsierender Neon-Effekt mit intensivem Glow</p>
+          <p className="text-sm text-muted-foreground">Fließende Plasma-Energie mit Wellenbewegung</p>
+        </div>
+
+        {/* Neural Network Effect */}
+        <div className="text-center p-6 bg-gradient-to-br from-orange-500/10 via-yellow-500/10 to-orange-500/10 rounded-xl border border-orange-500/30">
+          <FireText
+            text="Neural Network"
+            className="text-3xl font-heading mb-2"
+            variant="neural"
+            intensity="high"
+            glow={true}
+            animated={true}
+          />
+          <p className="text-sm text-muted-foreground">Neuronale Verbindungen mit pulsierender Energie</p>
         </div>
       </div>
 
@@ -162,16 +175,29 @@ export const HologramShowcase: React.FC<HologramShowcaseProps> = ({ className = 
               <FireText text="60fps" className="text-sm" variant="classic" animated={false} />
             </div>
             <div className="flex justify-between items-center p-2 bg-muted/50 rounded">
-              <span className="text-sm">Hologram Variants</span>
+              <span className="text-sm">New Hologram Effects</span>
               <span className="text-xs space-x-1">
-                <span className="inline-block w-2 h-2 bg-hologram-primary rounded-full animate-pulse"></span>
-                <span className="inline-block w-2 h-2 bg-hologram-secondary rounded-full animate-pulse animate-delay-500"></span>
-                <span className="inline-block w-2 h-2 bg-hologram-accent rounded-full animate-pulse animate-delay-1000"></span>
+                <span className="inline-block w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></span>
+                <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse animate-delay-500"></span>
+                <span className="inline-block w-2 h-2 bg-pink-500 rounded-full animate-pulse animate-delay-1000"></span>
+                <span className="inline-block w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
               </span>
             </div>
             <div className="flex justify-between items-center p-2 bg-muted/50 rounded">
-              <span className="text-sm">Interactive States</span>
-              <span className="text-sm font-numeric">12+ States</span>
+              <span className="text-sm">Quantum Physics</span>
+              <FireText text="2.5D" className="text-sm" variant="quantum" animated={false} />
+            </div>
+            <div className="flex justify-between items-center p-2 bg-muted/50 rounded">
+              <span className="text-sm">Matrix Code Flow</span>
+              <FireText text="60fps" className="text-sm" variant="matrix" animated={false} />
+            </div>
+            <div className="flex justify-between items-center p-2 bg-muted/50 rounded">
+              <span className="text-sm">Plasma Dynamics</span>
+              <FireText text="Wave" className="text-sm" variant="plasma" animated={false} />
+            </div>
+            <div className="flex justify-between items-center p-2 bg-muted/50 rounded">
+              <span className="text-sm">Neural Pulses</span>
+              <FireText text="AI" className="text-sm" variant="neural" animated={false} />
             </div>
           </div>
         </div>

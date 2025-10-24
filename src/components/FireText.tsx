@@ -6,7 +6,7 @@ interface FireTextProps {
   className?: string;
   ariaLabel?: string;
   priority?: "high" | "medium" | "low";
-  variant?: "classic" | "hologram" | "cyber" | "neon";
+  variant?: "classic" | "hologram" | "cyber" | "neon" | "quantum" | "matrix" | "plasma" | "neural";
   intensity?: "low" | "medium" | "high";
   glow?: boolean;
   animated?: boolean;
@@ -87,6 +87,14 @@ export const FireText: React.FC<FireTextProps> = ({
         return `${baseClasses} text-hologram-cyber`;
       case "neon":
         return `${baseClasses} text-hologram-neon`;
+      case "quantum":
+        return `${baseClasses} text-quantum-hologram`;
+      case "matrix":
+        return `${baseClasses} text-matrix-code`;
+      case "plasma":
+        return `${baseClasses} text-plasma-flow`;
+      case "neural":
+        return `${baseClasses} text-neural-network`;
       default:
         return `${baseClasses} fire-text-static`;
     }
@@ -103,6 +111,14 @@ export const FireText: React.FC<FireTextProps> = ({
         return "glow-cyber-pulse";
       case "neon":
         return "animate-pulse-glow";
+      case "quantum":
+        return "shadow-[0_0_20px_#00ffff,0_0_40px_#ff00ff,0_0_60px_#ffff00]";
+      case "matrix":
+        return "shadow-[0_0_15px_#00ff00,0_0_30px_#00ff00,0_0_45px_#00ff00]";
+      case "plasma":
+        return "shadow-[0_0_20px_#ff0080,0_0_40px_#8000ff,0_0_60px_#0080ff]";
+      case "neural":
+        return "shadow-[0_0_15px_#ff6b35,0_0_30px_#f7931e,0_0_45px_#ff6b35]";
       default:
         return "shadow-glow";
     }
@@ -191,7 +207,11 @@ export const FireText: React.FC<FireTextProps> = ({
           {text} - {variant === "classic" ? "animierter Text mit Feuer-Effekt" :
                    variant === "hologram" ? "holographischer Text-Effekt" :
                    variant === "cyber" ? "cyber-punk Text-Effekt" :
-                   "neon Text-Effekt"}
+                   variant === "neon" ? "neon Text-Effekt" :
+                   variant === "quantum" ? "quantum holographischer Text-Effekt" :
+                   variant === "matrix" ? "matrix code Text-Effekt" :
+                   variant === "plasma" ? "plasma flow Text-Effekt" :
+                   "neural network Text-Effekt"}
         </span>
       </div>
     </Element>
