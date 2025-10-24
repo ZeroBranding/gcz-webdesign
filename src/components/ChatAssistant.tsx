@@ -23,6 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { CSSProperties } from "react";
 
 interface Message {
   role: "user" | "assistant";
@@ -494,10 +495,10 @@ ${gczKnowledge.company.address}
         exit={{ opacity: 0, y: 100, scale: 0.8 }}
         className="fixed bottom-6 right-6 z-50"
         style={{
-          width: chatSize.width,
-          height: chatSize.height,
+          width: `${chatSize.width}px`,
+          height: `${chatSize.height}px`,
           cursor: isDragging ? 'grabbing' : 'grab'
-        }}
+        } as CSSProperties}
       >
         <Card className="w-full h-full shadow-2xl border-2 border-gold bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl overflow-hidden">
           {/* Gold Header */}
