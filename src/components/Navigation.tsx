@@ -4,10 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { Menu, X, ShoppingCart, Sun, Moon } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
-import { ContrastSlider } from "@/components/ContrastSlider";
 import { LoginButton } from "@/components/auth/AuthModal";
 import logo from "@/assets/logo.png";
 
@@ -82,13 +81,46 @@ export const Navigation = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-md bg-background/80 safe-area-inset">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Left: Contrast Slider - Hidden on mobile */}
-          <div className="hidden lg:flex min-w-[200px]">
-            <ContrastSlider />
+          {/* Left: Startseite Button */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link to="/">
+              <Button variant="ghost" size="sm" className="hover-lift">
+                🏠 Startseite
+              </Button>
+            </Link>
           </div>
 
-          {/* Mobile Menu Button - Show only on mobile */}
-          <div className="lg:hidden">
+          {/* Center: Empty Space */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+          </div>
+
+          {/* Right: Navigation Items */}
+          <div className="flex items-center gap-3">
+            <LanguageSelector />
+
+            <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
+              <span className="text-sm font-numeric font-bold text-gradient-gold">
+                €{total}
+              </span>
+            </div>
+
+            <Link to="/cart">
+              <Button variant="ghost" size="icon" className="relative hover-lift">
+                <ShoppingCart className="h-5 w-5" />
+                {items.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {items.length}
+                  </span>
+                )}
+              </Button>
+            </Link>
+
+            {/* Auth Button */}
+            <div className="hidden md:block">
+              <LoginButton />
+            </div>
+
+>>>>>>> adeb29878999ad3d5efdae657186c4d27176bf8e
             <Button
               variant="ghost"
               size="icon"
