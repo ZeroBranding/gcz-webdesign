@@ -18,22 +18,30 @@ export default function Impressum() {
             <div className="prose prose-invert max-w-none">
               <h2 className="text-2xl font-heading font-bold mb-4">Angaben gemäß § 5 TMG</h2>
               <p className="mb-6 text-muted-foreground">
-                Webdesign Factory<br />
-                Musterstraße 123<br />
-                12345 Berlin<br />
+                German Code Zero<br />
+                Ostmarkstraße 56<br />
+                48145 Münster<br />
                 Deutschland
               </p>
 
               <h3 className="text-xl font-heading font-bold mb-3 mt-8">Kontakt</h3>
               <p className="mb-6 text-muted-foreground">
-                Telefon: +49 (0) 123 456789<br />
-                E-Mail: info@webdesign-factory.de
+                Telefon: 01632419823<br />
+                WhatsApp: 01633338242<br />
+                E-Mail: ki@gcz-webdesign.de
               </p>
 
               <h3 className="text-xl font-heading font-bold mb-3 mt-8">Vertreten durch</h3>
               <p className="mb-6 text-muted-foreground">
-                Max Mustermann<br />
-                Geschäftsführer
+                Liyana Mustermann<br />
+                Geschäftsführerin
+              </p>
+
+              <h3 className="text-xl font-heading font-bold mb-3 mt-8">Öffnungszeiten</h3>
+              <p className="mb-6 text-muted-foreground">
+                Montag - Freitag: 10:00 - 22:00 Uhr<br />
+                Samstag: 12:00 - 17:00 Uhr<br />
+                Sonntag: Nach Vereinbarung
               </p>
 
               <h3 className="text-xl font-heading font-bold mb-3 mt-8">Registereintrag</h3>

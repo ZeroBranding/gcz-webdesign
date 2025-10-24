@@ -14,13 +14,22 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-2 text-muted-foreground">
               <li className="hover:text-foreground transition-colors">
-                📧 info@webdesign-factory.de
+                📧 ki@gcz-webdesign.de
               </li>
               <li className="hover:text-foreground transition-colors">
-                📞 +49 (0) 123 456789
+                📞 01632419823
               </li>
               <li className="hover:text-foreground transition-colors">
-                📍 Musterstraße 123, 12345 Berlin
+                💬 WhatsApp: 01633338242
+              </li>
+              <li className="hover:text-foreground transition-colors">
+                📍 Ostmarkstraße 56, 48145 Münster
+              </li>
+              <li className="hover:text-foreground transition-colors">
+                🕐 Mo-Fr: 10:00-22:00 Uhr
+              </li>
+              <li className="hover:text-foreground transition-colors">
+                🕐 Sa: 12:00-17:00 Uhr
               </li>
             </ul>
           </div>
@@ -101,7 +110,7 @@ export const Footer = () => {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border/50 text-center text-muted-foreground">
-          <p>&copy; {currentYear} Webdesign Factory. Alle Rechte vorbehalten.</p>
+          <p>&copy; {currentYear} German Code Zero. Alle Rechte vorbehalten.</p>
         </div>
       </div>
     </footer>

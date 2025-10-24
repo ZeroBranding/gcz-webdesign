@@ -150,7 +150,7 @@ export default function Kontakt() {
                   <Mail className="w-6 h-6 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">E-Mail</h3>
-                    <p className="text-muted-foreground">info@webdesign-factory.de</p>
+                    <p className="text-muted-foreground">ki@gcz-webdesign.de</p>
                   </div>
                 </div>
 
@@ -158,7 +158,7 @@ export default function Kontakt() {
                   <Phone className="w-6 h-6 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Telefon</h3>
-                    <p className="text-muted-foreground">+49 (0) 123 456789</p>
+                    <p className="text-muted-foreground">01632419823</p>
                   </div>
                 </div>
 
@@ -167,8 +167,8 @@ export default function Kontakt() {
                   <div>
                     <h3 className="font-semibold mb-1">Adresse</h3>
                     <p className="text-muted-foreground">
-                      Musterstraße 123<br />
-                      12345 Berlin<br />
+                      Ostmarkstraße 56<br />
+                      48145 Münster<br />
                       Deutschland
                     </p>
                   </div>
@@ -194,9 +194,9 @@ export default function Kontakt() {
             <Card className="p-8 border-primary/20">
               <h3 className="text-xl font-heading font-bold mb-4">Öffnungszeiten</h3>
               <div className="space-y-2 text-muted-foreground">
-                <p>Montag - Freitag: 9:00 - 18:00 Uhr</p>
-                <p>Samstag: Nach Vereinbarung</p>
-                <p>Sonntag: Geschlossen</p>
+                <p>Montag - Freitag: 10:00 - 22:00 Uhr</p>
+                <p>Samstag: 12:00 - 17:00 Uhr</p>
+                <p>Sonntag: Nach Vereinbarung</p>
               </div>
             </Card>
           </motion.div>
