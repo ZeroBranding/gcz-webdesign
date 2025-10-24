@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeroBackground } from "@/components/HeroBackground";
+import { FireText } from "@/components/FireText";
 import { Zap, Puzzle, Lock, Palette, Gauge, Shield, Users, FileText, Clock, Award } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const stats = [
   {
@@ -141,6 +143,29 @@ const features = [
 export default function Home() {
   return (
     <div className="min-h-screen">
+      {/* Logo und Webdesign Fabrik oben links */}
+      <div className="fixed top-24 left-8 z-40 flex flex-col items-start gap-4">
+        <motion.img
+          src={logo}
+          alt="German Code Zero"
+          className="h-24 w-auto"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          whileHover={{ scale: 1.05, rotate: [0, -5, 5, -3, 3, 0] }}
+        />
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <FireText 
+            text="Webdesign Fabrik" 
+            className="text-3xl md:text-4xl font-heading"
+          />
+        </motion.div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <HeroBackground />

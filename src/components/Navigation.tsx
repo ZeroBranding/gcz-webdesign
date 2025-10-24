@@ -77,24 +77,12 @@ export const Navigation = () => {
             </Link>
           </div>
 
-          {/* Center: Brand Name */}
+          {/* Center: Empty Space */}
           <div className="absolute left-1/2 -translate-x-1/2">
-            <h1 className="text-2xl lg:text-3xl font-heading font-bold text-gradient-gold-luxury tracking-wider">
-              Webdesign Fabrik
-            </h1>
           </div>
 
-          {/* Right: Logo + Navigation Items */}
+          {/* Right: Navigation Items */}
           <div className="flex items-center gap-3">
-            <Link to="/" className="hidden lg:block mr-4">
-              <motion.img
-                src={logo}
-                alt="German Code Zero"
-                className="h-16 w-auto"
-                whileHover={{ scale: 1.1, rotate: [0, -10, 10, -5, 5, 0] }}
-                transition={{ duration: 0.5 }}
-              />
-            </Link>
             <LanguageSelector />
 
             <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
