@@ -578,6 +578,20 @@ All colors MUST be HSL.
     }
   }
 
+  /* Hologram Animation Delays */
+  .animate-delay-500 { animation-delay: 0.5s; }
+  .animate-delay-1000 { animation-delay: 1s; }
+
+  /* Color utilities for holograms */
+  .bg-hologram-primary { background-color: hsl(var(--hologram-primary)); }
+  .bg-hologram-secondary { background-color: hsl(var(--hologram-secondary)); }
+  .bg-hologram-accent { background-color: hsl(var(--hologram-accent)); }
+
+  /* Border utilities */
+  .border-hologram-primary { border-color: hsl(var(--hologram-primary)); }
+  .border-hologram-secondary { border-color: hsl(var(--hologram-secondary)); }
+  .border-hologram-accent { border-color: hsl(var(--hologram-accent)); }
+
   /* Motion Design System */
   .motion-spring {
     transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
