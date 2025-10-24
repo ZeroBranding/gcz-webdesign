@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { ContrastSlider } from "@/components/ContrastSlider";
 import { LoginButton } from "@/components/auth/AuthModal";
 import { FireText } from "@/components/FireText";
 import logo from "@/assets/logo.png";
@@ -95,7 +96,7 @@ export const Navigation = () => {
           <div className="absolute left-1/2 -translate-x-1/2">
             <FireText 
               text="Webdesign Fabrik" 
-              className="text-2xl lg:text-3xl font-heading"
+              className="text-2xl lg:text-3xl font-heading fire-glow-nav"
             />
           </div>
 
@@ -125,7 +126,6 @@ export const Navigation = () => {
               <LoginButton />
             </div>
 
->>>>>>> adeb29878999ad3d5efdae657186c4d27176bf8e
             <Button
               variant="ghost"
               size="icon"
@@ -144,125 +144,6 @@ export const Navigation = () => {
                 )}
               </motion.div>
             </Button>
-          </div>
-
-          {/* Center: Logo with Animation */}
-          <Link
-            to="/"
-            className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0"
-            aria-label="Zur Startseite"
-          >
-            <motion.img
-              src={logo}
-              alt="German Code Zero"
-              className="h-10 sm:h-12 w-auto"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            />
-          </Link>
-
-          {/* Right: Navigation Items */}
-          <div className="flex items-center gap-2 lg:gap-3">
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-3">
-              <Link to="/">
-                <Button variant="ghost" size="sm" className="hover-lift focus-ring">
-                  🏠 Startseite
-                </Button>
-              </Link>
-
-              <LanguageSelector />
-
-              <div className="flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
-                <span className="text-sm font-numeric font-bold text-gradient-gold">
-                  €{total}
-                </span>
-              </div>
-
-              <Link to="/cart">
-                <Button variant="ghost" size="icon" className="hover-lift focus-ring relative">
-                  <ShoppingCart className="h-5 w-5" />
-                  {items.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {items.length}
-                    </span>
-                  )}
-                </Button>
-              </Link>
-
-              <LoginButton />
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                className="hover-lift focus-ring"
-                aria-label="Theme umschalten"
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </Button>
-            </div>
-
-            {/* Mobile Cart and Auth */}
-            <div className="lg:hidden flex items-center gap-2">
-              <Link to="/cart">
-                <Button variant="ghost" size="icon" className="hover-lift focus-ring relative touch-target">
-                  <ShoppingCart className="h-5 w-5" />
-                  {items.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {items.length}
-                    </span>
-                  )}
-                </Button>
-              </Link>
-
-              <div className="flex items-center gap-2 px-2 py-1 bg-muted rounded-lg">
-                <span className="text-sm font-numeric font-bold text-gradient-gold">
-                  €{total}
-                </span>
-              </div>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                className="hover-lift focus-ring touch-target"
-                aria-label="Theme umschalten"
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-4 w-4" />
-                ) : (
-                  <Moon className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
-
-            {/* Desktop Menu Button */}
-            <div className="hidden lg:block">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="hover-lift focus-ring"
-                aria-label="Menü öffnen"
-              >
-                <motion.div
-                  animate={{ rotate: isMenuOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {isMenuOpen ? (
-                    <X className="h-6 w-6" />
-                  ) : (
-                    <Menu className="h-6 w-6" />
-                  )}
-                </motion.div>
-              </Button>
-            </div>
           </div>
         </div>
       </nav>
