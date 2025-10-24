@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +7,41 @@ import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2, Eye, EyeOff, Mail, Lock, User, Chrome, Apple } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRateLimit } from "@/contexts/RateLimitContext";
+
+// Input Validation Utilities
+const validateEmail = (email: string): string | null => {
+  if (!email) return "E-Mail-Adresse ist erforderlich";
+  if (email.length > 254) return "E-Mail-Adresse ist zu lang";
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) return "Ungültige E-Mail-Adresse";
+  if (email.includes('..')) return "E-Mail-Adresse enthält doppelte Punkte";
+  return null;
+};
+
+const validatePassword = (password: string): string | null => {
+  if (!password) return "Passwort ist erforderlich";
+  if (password.length < 8) return "Passwort muss mindestens 8 Zeichen lang sein";
+  if (password.length > 128) return "Passwort ist zu lang";
+  if (!/(?=.*[a-z])/.test(password)) return "Passwort muss mindestens einen Kleinbuchstaben enthalten";
+  if (!/(?=.*[A-Z])/.test(password)) return "Passwort muss mindestens einen Großbuchstaben enthalten";
+  if (!/(?=.*\d)/.test(password)) return "Passwort muss mindestens eine Zahl enthalten";
+  if (!/(?=.*[@$!%*?&])/.test(password)) return "Passwort muss mindestens ein Sonderzeichen enthalten";
+  return null;
+};
+
+const validateName = (name: string): string | null => {
+  if (!name) return "Name ist erforderlich";
+  if (name.length < 2) return "Name muss mindestens 2 Zeichen lang sein";
+  if (name.length > 50) return "Name ist zu lang";
+  if (!/^[a-zA-ZäöüÄÖÜß\s-]+$/.test(name)) return "Name enthält ungültige Zeichen";
+  if (name.trim() !== name) return "Name darf keine führenden oder nachfolgenden Leerzeichen enthalten";
+  return null;
+};
+
+const sanitizeInput = (input: string): string => {
+  return input.trim().replace(/[<>"&]/g, '');
+};
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -16,6 +50,7 @@ interface LoginFormProps {
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegister }) => {
   const { login, loginWithGoogle, loginWithApple, loading } = useAuth();
+  const { checkRateLimit, recordAttempt, getRemainingTime } = useRateLimit();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -25,11 +60,39 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToRegis
     e.preventDefault();
     setError("");
 
+    // Rate limiting check
+    if (!checkRateLimit('login')) {
+      const remainingTime = getRemainingTime('login');
+      const minutes = Math.ceil(remainingTime / 60000);
+      setError(`Zu viele Login-Versuche. Bitte versuchen Sie es in ${minutes} Minuten erneut.`);
+      return;
+    }
+
+    // Input sanitization
+    const cleanEmail = sanitizeInput(email);
+    const cleanPassword = sanitizeInput(password);
+
+    // Client-side validation
+    const emailError = validateEmail(cleanEmail);
+    if (emailError) {
+      setError(emailError);
+      recordAttempt('login');
+      return;
+    }
+
+    const passwordError = validatePassword(cleanPassword);
+    if (passwordError) {
+      setError(passwordError);
+      recordAttempt('login');
+      return;
+    }
+
     try {
-      await login(email, password);
+      await login(cleanEmail, cleanPassword);
       onSuccess?.();
     } catch (error) {
       setError("Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.");
+      recordAttempt('login');
     }
   };
 
@@ -160,6 +223,7 @@ interface RegisterFormProps {
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onSwitchToLogin }) => {
   const { register, loading } = useAuth();
+  const { checkRateLimit, recordAttempt, getRemainingTime } = useRateLimit();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -172,8 +236,45 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onSwitchT
     e.preventDefault();
     setError("");
 
-    if (password !== confirmPassword) {
+    // Rate limiting check
+    if (!checkRateLimit('register')) {
+      const remainingTime = getRemainingTime('register');
+      const minutes = Math.ceil(remainingTime / 60000);
+      setError(`Zu viele Registrierungsversuche. Bitte versuchen Sie es in ${minutes} Minuten erneut.`);
+      return;
+    }
+
+    // Input sanitization
+    const cleanName = sanitizeInput(name);
+    const cleanEmail = sanitizeInput(email);
+    const cleanPassword = sanitizeInput(password);
+    const cleanConfirmPassword = sanitizeInput(confirmPassword);
+
+    // Client-side validation
+    const nameError = validateName(cleanName);
+    if (nameError) {
+      setError(nameError);
+      recordAttempt('register');
+      return;
+    }
+
+    const emailError = validateEmail(cleanEmail);
+    if (emailError) {
+      setError(emailError);
+      recordAttempt('register');
+      return;
+    }
+
+    const passwordError = validatePassword(cleanPassword);
+    if (passwordError) {
+      setError(passwordError);
+      recordAttempt('register');
+      return;
+    }
+
+    if (cleanPassword !== cleanConfirmPassword) {
       setError("Passwörter stimmen nicht überein.");
+      recordAttempt('register');
       return;
     }
 
@@ -183,10 +284,11 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onSwitchT
     }
 
     try {
-      await register(email, password, name);
+      await register(cleanEmail, cleanPassword, cleanName);
       onSuccess?.();
     } catch (error) {
       setError("Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.");
+      recordAttempt('register');
     }
   };
 
