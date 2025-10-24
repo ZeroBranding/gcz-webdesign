@@ -1,20 +1,15 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { toast } from "sonner";
-
-export interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  type: "package" | "addon";
-  description?: string;
-}
+import { CartItem } from "@/types";
 
 interface CartContextType {
   items: CartItem[];
   addItem: (item: CartItem) => void;
   removeItem: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
   total: number;
+  itemCount: number;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -40,15 +35,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     toast.success("Aus dem Warenkorb entfernt");
   };
 
+  const updateQuantity = (id: string, quantity: number) => {
+    setItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+      )
+    );
+  };
+
   const clearCart = () => {
     setItems([]);
     toast.success("Warenkorb geleert");
   };
 
-  const total = items.reduce((sum, item) => sum + item.price, 0);
+  const total = items.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+  const itemCount = items.reduce((count, item) => count + (item.quantity || 1), 0);
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, clearCart, total }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, updateQuantity, clearCart, total, itemCount }}>
       {children}
     </CartContext.Provider>
   );

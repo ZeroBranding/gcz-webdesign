@@ -3,666 +3,126 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Check, Smartphone, Globe, Zap, Shield, Palette, Headphones } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, Check, ShoppingCart, Eye, Download, Star, Zap, Shield, Clock } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
-// Template-Daten (gleiche wie in TemplateCategory)
+// Template-Daten (aktualisiert mit neuen Level-Namen und Preisen)
 const categoryData: Record<string, any> = {
   "e-commerce": {
     name: "E-Commerce",
     emoji: "🛒",
-    templates: [
-      {
-        id: "onepager-ecommerce",
-        name: "Onepager E-Commerce",
+    templates: {
+      "basic-ecommerce": {
+        id: "basic-ecommerce",
+        name: "Basic E-Commerce",
         originalPrice: 799,
         price: 49,
         discount: 93.87,
-        level: "onepager",
-        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-        description: "Einfache, aber effektive One-Page-Lösung für kleine Online-Shops mit grundlegenden Funktionen.",
+        level: "basic",
+        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=800&fit=crop",
+        description: "Einfache, aber effektive One-Page-Lösung für kleine Online-Shops mit grundlegenden Funktionen. Perfekt für den Start in den E-Commerce.",
         features: [
           "Responsive One-Page Design",
-          "Produktgalerie",
-          "Kontaktformular",
+          "Produktgalerie mit bis zu 20 Produkten",
+          "Kontaktformular mit Lead-Capture",
           "Grundlegende SEO-Optimierung",
-          "Schnelle Ladezeiten",
-          "Mobile-optimiert"
+          "Schnelle Ladezeiten (< 2s)",
+          "Mobile-optimiert für alle Geräte",
+          "Social Media Integration",
+          "Google Analytics Integration"
         ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop"
-        ]
+        tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "SEO Optimized"],
+        category: "e-commerce"
       },
-      {
-        id: "business-ecommerce",
-        name: "Business E-Commerce",
+      "professional-ecommerce": {
+        id: "professional-ecommerce",
+        name: "Professional E-Commerce",
         originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
-        level: "business",
-        image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&h=600&fit=crop",
-        description: "Vollständige Business-Website mit Shop-Funktionalität, Blog und erweiterten Features.",
+        price: 149,
+        discount: 90.06,
+        level: "professional",
+        image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=1200&h=800&fit=crop",
+        description: "Vollständige Business-Website mit erweiterten Shop-Funktionen. Ideal für wachsende Unternehmen.",
         features: [
-          "Mehrseitige Website",
-          "Produktkatalog",
-          "Blog-Integration",
+          "Mehrseitige Website (5+ Seiten)",
+          "Produktkatalog mit Kategorien",
+          "Blog-Integration für Content Marketing",
           "Kontakt- & Anfrageformulare",
           "Erweiterte SEO-Optimierung",
           "Social Media Integration",
-          "Google Analytics",
-          "Newsletter-Anmeldung"
+          "Google Analytics & Search Console",
+          "Newsletter-Anmeldung",
+          "Warenkorb-Funktionen",
+          "Zahlungsintegration (Stripe, PayPal)"
         ],
-        tech: ["React", "Node.js", "SEO", "Analytics", "CMS"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop"
-        ]
+        tech: ["React", "Node.js", "SEO", "Analytics", "CMS", "E-Commerce"],
+        category: "e-commerce"
       },
-      {
+      "premium-ecommerce": {
         id: "premium-ecommerce",
         name: "Premium E-Commerce",
         originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
+        price: 299,
+        discount: 87.00,
         level: "premium",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=800&fit=crop",
         description: "Premium-Lösung mit fortschrittlichen Funktionen und exklusivem Design für Marken.",
         features: [
           "Premium Custom Design",
           "Erweiterte Shop-Funktionen",
-          "CRM-Integration",
-          "Multi-Language Support",
+          "CRM-Integration (HubSpot, Salesforce)",
+          "Multi-Language Support (5+ Sprachen)",
           "Advanced SEO & Performance",
           "E-Mail Marketing Integration",
           "A/B Testing Tools",
-          "Priority Support",
+          "Priority Support (24/7)",
           "Custom Animationen",
-          "Brand Guidelines"
+          "Brand Guidelines Integration",
+          "Inventory Management",
+          "Multi-Channel Sales"
         ],
-        tech: ["Next.js", "TypeScript", "Advanced SEO", "CRM", "Multi-Language"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop"
-        ]
+        tech: ["Next.js", "TypeScript", "Advanced SEO", "CRM", "Multi-Language", "E-Commerce Platform"],
+        category: "e-commerce"
       },
-      {
+      "enterprise-ecommerce": {
         id: "enterprise-ecommerce",
         name: "Enterprise E-Commerce",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
+        originalPrice: 4999,
+        price: 1299,
+        discount: 74.01,
         level: "enterprise",
-        image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=800&fit=crop",
         description: "Enterprise-Lösung für große Unternehmen mit komplexen Anforderungen und Skalierbarkeit.",
         features: [
           "Enterprise-Grade Architektur",
           "Multi-Store Management",
-          "API Integration",
-          "Advanced Analytics",
-          "Custom Backend",
-          "Load Balancing",
+          "API Integration (ERP, CRM)",
+          "Advanced Analytics & Reporting",
+          "Custom Backend Development",
+          "Load Balancing & CDN",
           "Security Hardening",
-          "24/7 Monitoring",
+          "24/7 Monitoring & Support",
           "White-Label Lösung",
-          "Dedicated Support",
+          "Dedicated Account Manager",
           "Custom Development",
-          "SLA Garantie"
-        ],
-        tech: ["Enterprise Stack", "Microservices", "Cloud", "Security", "DevOps"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
-        ]
-      }
-    ]
-  },
-  "gastronomie": {
-    name: "Gastronomie",
-    emoji: "🍽️",
-    templates: [
-      {
-        id: "onepager-gastronomie",
-        name: "Onepager Gastronomie",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
-        level: "onepager",
-        image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
-        description: "Einfache One-Page-Lösung für Restaurants mit Speisekarte und Reservierung.",
-        features: [
-          "Responsive One-Page Design",
-          "Digitale Speisekarte",
-          "Online-Reservierung",
-          "Kontaktinformationen",
-          "Standort & Öffnungszeiten",
-          "Mobile-optimiert"
-        ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Mobile-First"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "business-gastronomie",
-        name: "Business Gastronomie",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
-        level: "business",
-        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop",
-        description: "Vollständige Restaurant-Website mit mehreren Seiten und erweiterten Funktionen.",
-        features: [
-          "Mehrseitige Website",
-          "Erweiterte Speisekarte",
-          "Online-Reservierungssystem",
-          "Event-Kalender",
-          "Galerie & Impressionen",
-          "Team-Vorstellung",
-          "SEO-Optimierung",
-          "Social Media Integration"
-        ],
-        tech: ["React", "Booking System", "Gallery", "SEO"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "premium-gastronomie",
-        name: "Premium Gastronomie",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
-        level: "premium",
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
-        description: "Premium-Lösung für gehobene Gastronomie mit exklusiven Features.",
-        features: [
-          "Premium Design & Branding",
-          "Erweiterte Reservierung",
-          "Event-Management",
-          "Wine-Card Integration",
-          "Multi-Language Support",
-          "Advanced SEO",
-          "E-Mail Marketing",
-          "Loyalty Program Integration",
-          "Custom Animationen",
-          "Brand Guidelines"
-        ],
-        tech: ["Premium Stack", "Multi-Language", "CRM", "Loyalty"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "enterprise-gastronomie",
-        name: "Enterprise Gastronomie",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
-        level: "enterprise",
-        image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop",
-        description: "Enterprise-Lösung für Restaurant-Ketten und große Gastronomiebetriebe.",
-        features: [
-          "Multi-Location Management",
-          "Zentrale Verwaltung",
-          "API Integration",
-          "Advanced Analytics",
-          "Staff Management",
-          "Inventory System",
+          "SLA Garantie (99.9% Uptime)",
           "Multi-Brand Support",
-          "White-Label Lösung",
-          "24/7 Support",
-          "Custom Development"
+          "Global Content Delivery"
         ],
-        tech: ["Enterprise", "Multi-Location", "Analytics", "API"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=800&h=600&fit=crop"
-        ]
+        tech: ["Enterprise Stack", "Microservices", "Cloud Infrastructure", "Security", "DevOps", "Global CDN"],
+        category: "e-commerce"
       }
-    ]
-  },
-  "immobilien": {
-    name: "Immobilien",
-    emoji: "🏢",
-    templates: [
-      {
-        id: "onepager-immobilien",
-        name: "Onepager Immobilien",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
-        level: "onepager",
-        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop",
-        description: "Einfache One-Page-Lösung für Immobilienmakler mit Objektpräsentation.",
-        features: [
-          "Responsive One-Page Design",
-          "Objektgalerie",
-          "Kontaktformular",
-          "Standortinformationen",
-          "Grundlegende SEO",
-          "Mobile-optimiert"
-        ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Gallery"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "business-immobilien",
-        name: "Business Immobilien",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
-        level: "business",
-        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-        description: "Vollständige Makler-Website mit Portfolio und erweiterten Features.",
-        features: [
-          "Mehrseitige Website",
-          "Immobilien-Katalog",
-          "Suchfunktion",
-          "Kontaktformulare",
-          "Virtuelle Besichtigungen",
-          "Team-Vorstellung",
-          "SEO-Optimierung",
-          "Social Media Integration"
-        ],
-        tech: ["React", "Search", "Virtual Tours", "Portfolio"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "premium-immobilien",
-        name: "Premium Immobilien",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
-        level: "premium",
-        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-        description: "Premium-Lösung für Luxusimmobilien mit exklusivem Design.",
-        features: [
-          "Luxury Design",
-          "360° Virtual Tours",
-          "CRM-Integration",
-          "Multi-Language",
-          "Advanced SEO",
-          "Lead Management",
-          "Newsletter System",
-          "Custom Animationen",
-          "Brand Guidelines",
-          "Priority Support"
-        ],
-        tech: ["360° Tours", "CRM", "Multi-Language", "Lead Management"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "enterprise-immobilien",
-        name: "Enterprise Immobilien",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
-        level: "enterprise",
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-        description: "Enterprise-Lösung für große Immobilienunternehmen und Plattformen.",
-        features: [
-          "Multi-Office Management",
-          "Enterprise CRM",
-          "API Integration",
-          "Advanced Analytics",
-          "Property Management",
-          "Multi-Brand Support",
-          "White-Label Lösung",
-          "24/7 Support",
-          "Custom Development",
-          "SLA Garantie"
-        ],
-        tech: ["Enterprise CRM", "Multi-Office", "Analytics", "API"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop"
-        ]
-      }
-    ]
-  },
-  "portfolio": {
-    name: "Portfolio",
-    emoji: "💼",
-    templates: [
-      {
-        id: "onepager-portfolio",
-        name: "Onepager Portfolio",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
-        level: "onepager",
-        image: "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800&h=600&fit=crop",
-        description: "Einfache One-Page-Lösung für Freelancer und kleine Portfolios.",
-        features: [
-          "Responsive One-Page Design",
-          "Projektgalerie",
-          "Kontaktformular",
-          "About Section",
-          "Grundlegende SEO",
-          "Mobile-optimiert"
-        ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Portfolio Gallery"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "business-portfolio",
-        name: "Business Portfolio",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
-        level: "business",
-        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop",
-        description: "Vollständige Portfolio-Website mit mehreren Projekten und Services.",
-        features: [
-          "Mehrseitige Website",
-          "Erweiterte Projektgalerie",
-          "Services Section",
-          "Kontakt & Anfragen",
-          "Blog-Integration",
-          "SEO-Optimierung",
-          "Social Media",
-          "Testimonials"
-        ],
-        tech: ["React", "Portfolio CMS", "Blog", "Testimonials"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "premium-portfolio",
-        name: "Premium Portfolio",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
-        level: "premium",
-        image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
-        description: "Premium-Lösung für Agenturen und Kreativprofis mit erweiterten Features.",
-        features: [
-          "Premium Design",
-          "Case Studies",
-          "Team Section",
-          "Client Portal",
-          "Multi-Language",
-          "Advanced SEO",
-          "Lead Generation",
-          "Custom Animationen",
-          "Brand Guidelines",
-          "Priority Support"
-        ],
-        tech: ["Advanced Portfolio", "Case Studies", "Multi-Language", "Lead Gen"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "enterprise-portfolio",
-        name: "Enterprise Portfolio",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
-        level: "enterprise",
-        image: "https://images.unsplash.com/photo-1541963463532-d68292c34d19?w=800&h=600&fit=crop",
-        description: "Enterprise-Lösung für große Agenturen und Unternehmen.",
-        features: [
-          "Multi-Brand Management",
-          "Enterprise CMS",
-          "API Integration",
-          "Advanced Analytics",
-          "Team Management",
-          "Client Portal",
-          "White-Label Lösung",
-          "24/7 Support",
-          "Custom Development",
-          "SLA Garantie"
-        ],
-        tech: ["Enterprise CMS", "Multi-Brand", "Analytics", "API"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1541963463532-d68292c34d19?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-        ]
-      }
-    ]
-  },
-  "corporate": {
-    name: "Corporate",
-    emoji: "🏛️",
-    templates: [
-      {
-        id: "onepager-corporate",
-        name: "Onepager Corporate",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
-        level: "onepager",
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
-        description: "Einfache One-Page-Lösung für Unternehmenspräsentation.",
-        features: [
-          "Responsive One-Page Design",
-          "Unternehmensprofil",
-          "Services Overview",
-          "Kontaktformular",
-          "Grundlegende SEO",
-          "Mobile-optimiert"
-        ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Corporate Design"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "business-corporate",
-        name: "Business Corporate",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
-        level: "business",
-        image: "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=600&fit=crop",
-        description: "Vollständige Unternehmenswebsite mit mehreren Bereichen.",
-        features: [
-          "Mehrseitige Website",
-          "Services & Produkte",
-          "Team Section",
-          "Kontakt & Anfragen",
-          "News & Blog",
-          "SEO-Optimierung",
-          "Social Media",
-          "Karriere"
-        ],
-        tech: ["React", "Corporate CMS", "Blog", "Careers"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "premium-corporate",
-        name: "Premium Corporate",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
-        level: "premium",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
-        description: "Premium-Lösung für etablierte Unternehmen mit erweiterten Features.",
-        features: [
-          "Executive Design",
-          "Leadership Section",
-          "Investor Relations",
-          "Press Center",
-          "Multi-Language",
-          "Advanced SEO",
-          "Lead Management",
-          "Custom Animationen",
-          "Brand Guidelines",
-          "Priority Support"
-        ],
-        tech: ["Executive Design", "Multi-Language", "Investor Relations", "Press Center"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "enterprise-corporate",
-        name: "Enterprise Corporate",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
-        level: "enterprise",
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-        description: "Enterprise-Lösung für Konzerne und Großunternehmen.",
-        features: [
-          "Global Enterprise Design",
-          "Multi-Company Management",
-          "Intranet Integration",
-          "Advanced Analytics",
-          "Compliance Features",
-          "Multi-Brand Support",
-          "White-Label Lösung",
-          "24/7 Enterprise Support",
-          "Custom Development",
-          "SLA Garantie"
-        ],
-        tech: ["Global Enterprise", "Intranet", "Compliance", "Multi-Brand"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop"
-        ]
-      }
-    ]
-  },
-  "startup": {
-    name: "Startup",
-    emoji: "🚀",
-    templates: [
-      {
-        id: "onepager-startup",
-        name: "Onepager Startup",
-        originalPrice: 799,
-        price: 49,
-        discount: 93.87,
-        level: "onepager",
-        image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=600&fit=crop",
-        description: "Einfache One-Page-Lösung für Startup-Produktvorstellung.",
-        features: [
-          "Responsive One-Page Design",
-          "Produktvorstellung",
-          "Kontaktformular",
-          "Team Section",
-          "Grundlegende SEO",
-          "Mobile-optimiert"
-        ],
-        tech: ["HTML5", "CSS3", "JavaScript", "Startup Design"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "business-startup",
-        name: "Business Startup",
-        originalPrice: 1499,
-        price: 99,
-        discount: 93.40,
-        level: "business",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-        description: "Vollständige Startup-Website mit Produkt-Launch und Team-Präsentation.",
-        features: [
-          "Mehrseitige Website",
-          "Produkt-Launch Page",
-          "Team & About",
-          "Kontakt & Investment",
-          "Blog-Integration",
-          "SEO-Optimierung",
-          "Social Media",
-          "Newsletter"
-        ],
-        tech: ["React", "Launch Page", "Investment Portal", "Blog"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "premium-startup",
-        name: "Premium Startup",
-        originalPrice: 2299,
-        price: 249,
-        discount: 89.17,
-        level: "premium",
-        image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
-        description: "Premium-Lösung für Scale-ups mit erweiterten Investment-Features.",
-        features: [
-          "Scale-up Design",
-          "Investor Portal",
-          "Product Demo",
-          "Team Dashboard",
-          "Multi-Language",
-          "Advanced SEO",
-          "Lead Generation",
-          "Custom Animationen",
-          "Brand Guidelines",
-          "Priority Support"
-        ],
-        tech: ["Scale-up Stack", "Investor Portal", "Multi-Language", "Lead Gen"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1515378791036-0648a814c963?w=800&h=600&fit=crop"
-        ]
-      },
-      {
-        id: "enterprise-startup",
-        name: "Enterprise Startup",
-        originalPrice: 3499,
-        price: 999,
-        discount: 71.45,
-        level: "enterprise",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-        description: "Enterprise-Lösung für etablierte Tech-Unternehmen und Unicorns.",
-        features: [
-          "Enterprise SaaS Design",
-          "Multi-Product Platform",
-          "Developer Portal",
-          "Advanced Analytics",
-          "API Documentation",
-          "Multi-Brand Support",
-          "White-Label Lösung",
-          "24/7 Support",
-          "Custom Development",
-          "SLA Garantie"
-        ],
-        tech: ["SaaS Platform", "API Docs", "Multi-Product", "Enterprise Analytics"],
-        screenshots: [
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-          "https://images.unsplash.com/photo-1515378791036-0648a814c963?w=800&h=600&fit=crop"
-        ]
-      }
-    ]
+    }
   }
 };
 
 export default function TemplateDetail() {
-  const { category, template } = useParams();
+  const { category, template } = useParams<{ category: string; template: string }>();
+  const { addItem } = useCart();
+
   const data = category ? categoryData[category] : null;
-  const templateData = data?.templates?.find((t: any) => t.id === template);
+  const templateData = data?.templates?.[template || ''];
 
   if (!data || !templateData) {
     return (
@@ -679,22 +139,32 @@ export default function TemplateDetail() {
 
   const getLevelIcon = (level: string) => {
     switch (level) {
-      case 'onepager': return <Smartphone className="w-6 h-6" />;
-      case 'business': return <Globe className="w-6 h-6" />;
-      case 'premium': return <Palette className="w-6 h-6" />;
+      case 'basic': return <Zap className="w-6 h-6" />;
+      case 'professional': return <Shield className="w-6 h-6" />;
+      case 'premium': return <Star className="w-6 h-6" />;
       case 'enterprise': return <Shield className="w-6 h-6" />;
-      default: return <Globe className="w-6 h-6" />;
+      default: return <Shield className="w-6 h-6" />;
     }
   };
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'onepager': return 'bg-green-100 text-green-800 border-green-200';
-      case 'business': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'basic': return 'bg-green-100 text-green-800 border-green-200';
+      case 'professional': return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'premium': return 'bg-purple-100 text-purple-800 border-purple-200';
       case 'enterprise': return 'bg-red-100 text-red-800 border-red-200';
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
     }
+  };
+
+  const handleAddToCart = () => {
+    addItem({
+      id: templateData.id,
+      name: templateData.name,
+      price: templateData.price,
+      type: "package",
+      description: templateData.description
+    });
   };
 
   return (
@@ -705,39 +175,41 @@ export default function TemplateDetail() {
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Zurück zur Kategorie
+          Zurück zu {data.name}
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Screenshots Gallery */}
+          {/* Template Preview */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="space-y-4">
-              <Card className="overflow-hidden border-primary/20">
+            <Card className="overflow-hidden border-primary/20">
+              <div className="relative aspect-video overflow-hidden">
                 <img
                   src={templateData.image}
                   alt={templateData.name}
-                  className="w-full h-auto"
+                  className="w-full h-full object-cover"
                 />
-              </Card>
+                <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
 
-              {templateData.screenshots && templateData.screenshots.length > 1 && (
-                <div className="grid grid-cols-2 gap-4">
-                  {templateData.screenshots.slice(1, 3).map((screenshot: string, index: number) => (
-                    <Card key={index} className="overflow-hidden border-primary/20">
-                      <img
-                        src={screenshot}
-                        alt={`${templateData.name} Screenshot ${index + 2}`}
-                        className="w-full h-32 object-cover"
-                      />
-                    </Card>
-                  ))}
+                {/* Rabatt Badge */}
+                <div className="absolute top-6 left-6">
+                  <span className="inline-flex items-center px-4 py-2 bg-red-100 text-red-800 font-bold rounded-full border border-red-200 text-lg">
+                    🔥 -{templateData.discount}% RABATT
+                  </span>
                 </div>
-              )}
-            </div>
+
+                {/* Preview Button */}
+                <div className="absolute top-6 right-6">
+                  <Button variant="secondary" size="sm" className="backdrop-blur-sm">
+                    <Eye className="w-4 h-4 mr-2" />
+                    Live Preview
+                  </Button>
+                </div>
+              </div>
+            </Card>
           </motion.div>
 
           {/* Details */}
@@ -757,16 +229,14 @@ export default function TemplateDetail() {
               {templateData.name}
             </h1>
 
-            {/* Preis-Bereich mit Rabatt */}
+            {/* Pricing */}
             <div className="mb-6">
-              {/* Rabatt-Badge */}
               <div className="mb-2">
                 <span className="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-sm font-bold rounded-full border border-red-200">
-                  🔥 -{templateData.discount}% RABATT
+                  🔥 Begrenztes Angebot
                 </span>
               </div>
 
-              {/* Neuer Preis in Rot mit "statt" Hinweis */}
               <div className="flex items-baseline gap-2 mb-4">
                 <span className="text-3xl font-numeric font-bold text-red-600">
                   €{templateData.price}
@@ -805,13 +275,17 @@ export default function TemplateDetail() {
             </div>
 
             <div className="flex gap-4">
-              <Link to="/kontakt" className="flex-1">
-                <Button size="lg" className="w-full bg-primary hover:bg-primary/90 shadow-gold">
-                  Jetzt bestellen
-                </Button>
-              </Link>
+              <Button
+                size="lg"
+                className="flex-1 bg-primary hover:bg-primary/90 shadow-gold"
+                onClick={handleAddToCart}
+              >
+                <ShoppingCart className="w-5 h-5 mr-2" />
+                In den Warenkorb (€{templateData.price})
+              </Button>
               <Button size="lg" variant="outline" className="flex-1">
-                Live Demo anfragen
+                <Download className="w-4 h-4 mr-2" />
+                Demo Download
               </Button>
             </div>
 
