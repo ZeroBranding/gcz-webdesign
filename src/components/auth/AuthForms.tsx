@@ -288,8 +288,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess, onSwitchT
               id="terms"
               checked={acceptTerms}
               onChange={(e) => setAcceptTerms(e.target.checked)}
-              className="rounded"
+              className="rounded focus:ring-primary focus:ring-2"
               required
+              aria-describedby="terms-description"
+              aria-label="AGB und Datenschutzbestimmungen akzeptieren"
             />
             <Label htmlFor="terms" className="text-sm">
               Ich akzeptiere die{" "}

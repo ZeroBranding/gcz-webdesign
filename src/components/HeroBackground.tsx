@@ -203,8 +203,8 @@ export const HeroBackground = () => {
       {/* Webdesign-themed effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/3 to-transparent animate-pulse" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/3 to-transparent animate-pulse" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-red-500/3 to-transparent animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/3 to-transparent animate-pulse hero-effect-delay-1" />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-red-500/3 to-transparent animate-pulse hero-effect-delay-2" />
       </div>
     </div>
   );

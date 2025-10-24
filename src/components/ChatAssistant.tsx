@@ -139,15 +139,33 @@ export const ChatAssistant = () => {
     }
   }, []);
 
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setChatSize(prev => ({
+        width: mobile ? 320 : 384,
+        height: mobile ? 500 : 600
+      }));
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current && chatState === "open") {
-      setTimeout(() => {
+      const scrollTimeout = setTimeout(() => {
         scrollRef.current?.scrollTo({
           top: scrollRef.current.scrollHeight,
           behavior: "smooth"
         });
       }, 100);
+
+      return () => clearTimeout(scrollTimeout);
     }
   }, [messages, chatState]);
 
@@ -481,7 +499,6 @@ ${gczKnowledge.company.address}
         initial={{ opacity: 0, y: 100, scale: 0.8 }}
         animate={{
           opacity: 1,
-          y: 0,
           scale: 1,
           x: chatPosition.x,
           y: chatPosition.y,

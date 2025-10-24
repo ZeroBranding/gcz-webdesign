@@ -832,18 +832,18 @@ export default function Home() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
             {[
-              { name: "React", color: "#61DAFB", logo: "⚛️" },
-              { name: "Next.js", color: "#000000", logo: "▲" },
-              { name: "TypeScript", color: "#3178C6", logo: "TS" },
-              { name: "Tailwind CSS", color: "#38B2AC", logo: "🎨" },
-              { name: "Framer Motion", color: "#0055FF", logo: "🎭" },
-              { name: "Three.js", color: "#000000", logo: "🎲" },
-              { name: "Node.js", color: "#339933", logo: "🟢" },
-              { name: "Vite", color: "#646CFF", logo: "⚡" },
-              { name: "ESLint", color: "#4B32C3", logo: "🔍" },
-              { name: "Prettier", color: "#F7B93E", logo: "💅" },
-              { name: "Git", color: "#F05032", logo: "📋" },
-              { name: "VS Code", color: "#007ACC", logo: "💻" }
+              { name: "React", color: "#61DAFB", logo: "⚛️", gradient: "tech-gradient-react" },
+              { name: "Next.js", color: "#000000", logo: "▲", gradient: "tech-gradient-nextjs" },
+              { name: "TypeScript", color: "#3178C6", logo: "TS", gradient: "tech-gradient-typescript" },
+              { name: "Tailwind CSS", color: "#38B2AC", logo: "🎨", gradient: "tech-gradient-tailwind" },
+              { name: "Framer Motion", color: "#0055FF", logo: "🎭", gradient: "tech-gradient-framer" },
+              { name: "Three.js", color: "#000000", logo: "🎲", gradient: "tech-gradient-threejs" },
+              { name: "Node.js", color: "#339933", logo: "🟢", gradient: "tech-gradient-nodejs" },
+              { name: "Vite", color: "#646CFF", logo: "⚡", gradient: "tech-gradient-vite" },
+              { name: "ESLint", color: "#4B32C3", logo: "🔍", gradient: "tech-gradient-eslint" },
+              { name: "Prettier", color: "#F7B93E", logo: "💅", gradient: "tech-gradient-prettier" },
+              { name: "Git", color: "#F05032", logo: "📋", gradient: "tech-gradient-git" },
+              { name: "VS Code", color: "#007ACC", logo: "💻", gradient: "tech-gradient-vscode" }
             ].map((tech, index) => (
               <motion.div
                 key={tech.name}
@@ -857,8 +857,7 @@ export default function Home() {
                   <div className="text-4xl mb-3">{tech.logo}</div>
                   <div className="font-heading font-bold text-foreground mb-2">{tech.name}</div>
                   <div
-                    className="w-full h-1 rounded-full bg-gradient-to-r opacity-30 group-hover:opacity-60 transition-opacity"
-                    style={{ background: `linear-gradient(90deg, ${tech.color}, ${tech.color}40)` }}
+                    className={`w-full h-1 rounded-full opacity-30 group-hover:opacity-60 transition-opacity ${tech.gradient}`}
                   ></div>
                 </div>
               </motion.div>

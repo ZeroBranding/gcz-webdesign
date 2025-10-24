@@ -16,7 +16,20 @@ export const Navigation = () => {
   const { total, items } = useCart();
   const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -66,63 +79,22 @@ export const Navigation = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-md bg-background/80">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-md bg-background/80 safe-area-inset">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Left: Contrast Slider */}
-          <div className="hidden lg:block min-w-[200px]">
+          {/* Left: Contrast Slider - Hidden on mobile */}
+          <div className="hidden lg:flex min-w-[200px]">
             <ContrastSlider />
           </div>
 
-          {/* Center: Logo with Animation */}
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0">
-            <motion.img
-              src={logo}
-              alt="German Code Zero"
-              className="h-12 w-auto"
-              whileHover={{ scale: 1.1, rotate: [0, -10, 10, -5, 5, 0] }}
-              transition={{ duration: 0.5 }}
-            />
-          </Link>
-
-          {/* Right: Navigation Items */}
-          <div className="flex items-center gap-3">
-            {/* Startseite Button */}
-            <Link to="/">
-              <Button variant="ghost" size="sm" className="hidden md:flex hover-lift">
-                🏠 Startseite
-              </Button>
-            </Link>
-
-            <LanguageSelector />
-
-            <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
-              <span className="text-sm font-numeric font-bold text-gradient-gold">
-                €{total}
-              </span>
-            </div>
-
-            <Link to="/cart">
-              <Button variant="ghost" size="icon" className="relative hover-lift">
-                <ShoppingCart className="h-5 w-5" />
-                {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {items.length}
-                  </span>
-                )}
-              </Button>
-            </Link>
-
-            {/* Auth Button */}
-            <div className="hidden md:block">
-              <LoginButton />
-            </div>
-
+          {/* Mobile Menu Button - Show only on mobile */}
+          <div className="lg:hidden">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="hover-lift"
+              className="hover-lift touch-target"
+              aria-label="Menü öffnen"
             >
               <motion.div
                 animate={{ rotate: isMenuOpen ? 180 : 0 }}
@@ -135,6 +107,125 @@ export const Navigation = () => {
                 )}
               </motion.div>
             </Button>
+          </div>
+
+          {/* Center: Logo with Animation */}
+          <Link
+            to="/"
+            className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0"
+            aria-label="Zur Startseite"
+          >
+            <motion.img
+              src={logo}
+              alt="German Code Zero"
+              className="h-10 sm:h-12 w-auto"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            />
+          </Link>
+
+          {/* Right: Navigation Items */}
+          <div className="flex items-center gap-2 lg:gap-3">
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-3">
+              <Link to="/">
+                <Button variant="ghost" size="sm" className="hover-lift focus-ring">
+                  🏠 Startseite
+                </Button>
+              </Link>
+
+              <LanguageSelector />
+
+              <div className="flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
+                <span className="text-sm font-numeric font-bold text-gradient-gold">
+                  €{total}
+                </span>
+              </div>
+
+              <Link to="/cart">
+                <Button variant="ghost" size="icon" className="hover-lift focus-ring relative">
+                  <ShoppingCart className="h-5 w-5" />
+                  {items.length > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {items.length}
+                    </span>
+                  )}
+                </Button>
+              </Link>
+
+              <LoginButton />
+
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                className="hover-lift focus-ring"
+                aria-label="Theme umschalten"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
+              </Button>
+            </div>
+
+            {/* Mobile Cart and Auth */}
+            <div className="lg:hidden flex items-center gap-2">
+              <Link to="/cart">
+                <Button variant="ghost" size="icon" className="hover-lift focus-ring relative touch-target">
+                  <ShoppingCart className="h-5 w-5" />
+                  {items.length > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {items.length}
+                    </span>
+                  )}
+                </Button>
+              </Link>
+
+              <div className="flex items-center gap-2 px-2 py-1 bg-muted rounded-lg">
+                <span className="text-sm font-numeric font-bold text-gradient-gold">
+                  €{total}
+                </span>
+              </div>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                className="hover-lift focus-ring touch-target"
+                aria-label="Theme umschalten"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </Button>
+            </div>
+
+            {/* Desktop Menu Button */}
+            <div className="hidden lg:block">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="hover-lift focus-ring"
+                aria-label="Menü öffnen"
+              >
+                <motion.div
+                  animate={{ rotate: isMenuOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isMenuOpen ? (
+                    <X className="h-6 w-6" />
+                  ) : (
+                    <Menu className="h-6 w-6" />
+                  )}
+                </motion.div>
+              </Button>
+            </div>
           </div>
         </div>
       </nav>
@@ -149,6 +240,7 @@ export const Navigation = () => {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
             onClick={closeMenu}
+            aria-hidden="true"
           />
         )}
       </AnimatePresence>
@@ -161,44 +253,44 @@ export const Navigation = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 30 }}
             className="absolute top-[73px] left-0 right-0 bg-card/95 backdrop-blur-lg border-b border-border shadow-elegant z-50"
           >
-            <div className="container mx-auto px-4 py-8">
+            <div className="container mx-auto px-4 py-6 lg:py-8">
               {/* Main Navigation */}
-              <div className="mb-8">
-                <nav className="flex flex-wrap justify-center gap-6 pb-6 border-b border-border">
+              <div className="mb-6 lg:mb-8">
+                <nav className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 lg:gap-6 pb-6 border-b border-border">
                   <Link
                     to="/"
-                    className="text-lg font-heading hover:text-primary transition-colors"
+                    className="text-base lg:text-lg font-heading hover:text-primary transition-colors focus-ring py-2 px-3 rounded-lg hover:bg-muted/50"
                     onClick={closeMenu}
                   >
                     🏠 Startseite
                   </Link>
                   <Link
                     to="/templates"
-                    className="text-lg font-heading hover:text-primary transition-colors"
+                    className="text-base lg:text-lg font-heading hover:text-primary transition-colors focus-ring py-2 px-3 rounded-lg hover:bg-muted/50"
                     onClick={closeMenu}
                   >
                     🎨 Templates
                   </Link>
                   <Link
                     to="/preise"
-                    className="text-lg font-heading hover:text-primary transition-colors"
+                    className="text-base lg:text-lg font-heading hover:text-primary transition-colors focus-ring py-2 px-3 rounded-lg hover:bg-muted/50"
                     onClick={closeMenu}
                   >
                     💰 Preise
                   </Link>
                   <Link
                     to="/angebote"
-                    className="text-lg font-heading hover:text-primary transition-colors"
+                    className="text-base lg:text-lg font-heading hover:text-primary transition-colors focus-ring py-2 px-3 rounded-lg hover:bg-muted/50"
                     onClick={closeMenu}
                   >
                     🔥 Angebote
                   </Link>
                   <Link
                     to="/kontakt"
-                    className="text-lg font-heading hover:text-primary transition-colors"
+                    className="text-base lg:text-lg font-heading hover:text-primary transition-colors focus-ring py-2 px-3 rounded-lg hover:bg-muted/50"
                     onClick={closeMenu}
                   >
                     ✉️ Kontakt
@@ -207,11 +299,11 @@ export const Navigation = () => {
               </div>
 
               {/* Template Categories */}
-              <div>
-                <h3 className="text-xl font-heading font-bold mb-6 text-center text-gradient-gold">
+              <div className="mb-6 lg:mb-8">
+                <h3 className="text-lg lg:text-xl font-heading font-bold mb-4 lg:mb-6 text-center text-gradient-gold">
                   Template-Kategorien
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 lg:gap-4 max-w-5xl mx-auto">
                   {[
                     { icon: "🛒", name: "E-Commerce", path: "e-commerce" },
                     { icon: "🍽️", name: "Gastronomie", path: "gastronomie" },
@@ -227,36 +319,56 @@ export const Navigation = () => {
                     <Link
                       key={cat.path}
                       to={`/templates/${cat.path}`}
-                      className="flex flex-col items-center justify-center p-4 bg-muted rounded-lg hover:bg-primary/10 hover:scale-105 transition-all hover-lift"
+                      className="flex flex-col items-center justify-center p-3 lg:p-4 bg-muted rounded-lg hover:bg-primary/10 hover:scale-105 transition-all hover-lift focus-ring"
                       onClick={closeMenu}
                     >
-                      <span className="text-3xl mb-2">{cat.icon}</span>
-                      <span className="text-sm font-medium text-center">{cat.name}</span>
+                      <span className="text-2xl lg:text-3xl mb-2">{cat.icon}</span>
+                      <span className="text-xs lg:text-sm font-medium text-center leading-tight">{cat.name}</span>
                     </Link>
                   ))}
                 </div>
               </div>
 
+              {/* Mobile-specific sections */}
+              {isMobile && (
+                <div className="mb-6 space-y-4">
+                  {/* Mobile Auth */}
+                  <div className="flex justify-center">
+                    <LoginButton />
+                  </div>
+
+                  {/* Mobile Language Selector */}
+                  <div className="flex justify-center">
+                    <LanguageSelector />
+                  </div>
+
+                  {/* Mobile Contrast Slider */}
+                  <div className="flex justify-center px-4">
+                    <ContrastSlider />
+                  </div>
+                </div>
+              )}
+
               {/* Legal Footer */}
-              <div className="mt-8 pt-6 border-t border-border">
-                <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+              <div className="pt-4 lg:pt-6 border-t border-border">
+                <nav className="flex flex-wrap justify-center gap-4 lg:gap-6 text-sm text-muted-foreground">
                   <Link
                     to="/impressum"
-                    className="hover:text-primary transition-colors"
+                    className="hover:text-primary transition-colors focus-ring py-1 px-2 rounded"
                     onClick={closeMenu}
                   >
                     Impressum
                   </Link>
                   <Link
                     to="/datenschutz"
-                    className="hover:text-primary transition-colors"
+                    className="hover:text-primary transition-colors focus-ring py-1 px-2 rounded"
                     onClick={closeMenu}
                   >
                     Datenschutz
                   </Link>
                   <Link
                     to="/agbs"
-                    className="hover:text-primary transition-colors"
+                    className="hover:text-primary transition-colors focus-ring py-1 px-2 rounded"
                     onClick={closeMenu}
                   >
                     AGB
@@ -267,7 +379,7 @@ export const Navigation = () => {
               {/* Close Instructions */}
               <div className="mt-4 text-center">
                 <p className="text-xs text-muted-foreground">
-                  Drücken Sie ESC oder klicken Sie außerhalb, um zu schließen
+                  Drücken Sie ESC oder tippen Sie außerhalb, um zu schließen
                 </p>
               </div>
             </div>
