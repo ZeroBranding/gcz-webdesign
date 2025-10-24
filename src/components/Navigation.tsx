@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useCart } from "@/contexts/CartContext";
-import { useAuth } from "@/contexts/AuthContext";
-import { Menu, X, ShoppingCart, Sun, Moon } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { ContrastSlider } from "@/components/ContrastSlider";
@@ -13,9 +11,7 @@ import { FireText } from "@/components/FireText";
 import logo from "@/assets/logo.png";
 
 export const Navigation = () => {
-  const { theme, setTheme } = useTheme();
   const { total, items } = useCart();
-  const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -31,10 +27,6 @@ export const Navigation = () => {
 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
 
   // ESC-Taste Handler
   useEffect(() => {
@@ -83,11 +75,23 @@ export const Navigation = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-md bg-background/80 safe-area-inset">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Left: Startseite Button */}
+          {/* Left: Startseite Button mit Logo */}
           <div className="hidden lg:flex items-center gap-3">
             <Link to="/">
-              <Button variant="ghost" size="sm" className="hover-lift">
-                🏠 Startseite
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="hover-lift group relative overflow-hidden bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 hover:border-primary/40 transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                <img 
+                  src={logo} 
+                  alt="Webdesign Fabrik Logo" 
+                  className="h-5 w-5 mr-2 relative z-10 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"
+                />
+                <span className="relative z-10 font-semibold bg-gradient-to-r from-primary via-yellow-500 to-primary bg-clip-text text-transparent">
+                  Startseite
+                </span>
               </Button>
             </Link>
           </div>
@@ -106,17 +110,21 @@ export const Navigation = () => {
           <div className="flex items-center gap-3">
             <LanguageSelector />
 
-            <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
-              <span className="text-sm font-numeric font-bold text-gradient-gold">
+            <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-lg border border-primary/30 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+              <span className="text-sm font-numeric font-bold text-gradient-gold-luxury drop-shadow-[0_0_8px_rgba(234,179,8,0.6)]">
                 €{total}
               </span>
             </div>
 
             <Link to="/cart">
-              <Button variant="ghost" size="icon" className="relative hover-lift">
-                <ShoppingCart className="h-5 w-5" />
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="relative hover-lift group bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all duration-300"
+              >
+                <ShoppingCart className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
                 {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-gradient-to-br from-primary via-yellow-500 to-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold shadow-[0_0_10px_rgba(234,179,8,0.6)] animate-pulse">
                     {items.length}
                   </span>
                 )}
@@ -132,12 +140,13 @@ export const Navigation = () => {
               variant="ghost"
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="hover-lift touch-target"
+              className="hover-lift touch-target group bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all duration-300"
               aria-label="Menü öffnen"
             >
               <motion.div
                 animate={{ rotate: isMenuOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
+                className="group-hover:scale-110 transition-transform duration-300"
               >
                 {isMenuOpen ? (
                   <X className="h-6 w-6" />
