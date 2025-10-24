@@ -66,7 +66,7 @@ export const FireText: React.FC<FireTextProps> = ({
   };
 
   const headingProps = getHeadingProps();
-  const Element = headingProps.as as keyof JSX.IntrinsicElements;
+  const Element = headingProps.as as "h1" | "h2" | "h3" | "span";
 
   return (
     <Element

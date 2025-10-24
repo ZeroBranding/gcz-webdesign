@@ -12,3 +12,27 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://gcz-webdesign.de/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Disallow admin and API paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Allow important pages
+Allow: /
+Allow: /templates
+Allow: /templates/*
+Allow: /preise
+Allow: /angebote
+Allow: /kontakt
+Allow: /impressum
+Allow: /datenschutz
+Allow: /agbs

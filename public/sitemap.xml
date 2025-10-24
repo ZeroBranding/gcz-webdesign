@@ -1,46 +1,168 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
   <url>
-    <loc>https://webdesign-factory.de/</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://webdesign-factory.de/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://webdesign-factory.de/en/"/>
+    <loc>https://gcz-webdesign.de/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/"/>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Templates Overview -->
   <url>
-    <loc>https://webdesign-factory.de/preise</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://webdesign-factory.de/templates</loc>
+    <loc>https://gcz-webdesign.de/templates</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates"/>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Template Categories -->
   <url>
-    <loc>https://webdesign-factory.de/angebote</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://gcz-webdesign.de/templates/e-commerce</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/e-commerce"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://webdesign-factory.de/kontakt</loc>
+    <loc>https://gcz-webdesign.de/templates/gastronomie</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/gastronomie"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/immobilien</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/immobilien"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/portfolio"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/corporate</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/corporate"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/startup</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/startup"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/handwerk</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/handwerk"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/beauty</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/beauty"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/health</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/health"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gcz-webdesign.de/templates/coaching</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/templates/coaching"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://gcz-webdesign.de/preise</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/preise"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Offers -->
+  <url>
+    <loc>https://gcz-webdesign.de/angebote</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/angebote"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://gcz-webdesign.de/kontakt</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/kontakt"/>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Shopping -->
   <url>
-    <loc>https://webdesign-factory.de/impressum</loc>
+    <loc>https://gcz-webdesign.de/cart</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/cart"/>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://gcz-webdesign.de/impressum</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/impressum"/>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
-    <loc>https://webdesign-factory.de/datenschutz</loc>
+    <loc>https://gcz-webdesign.de/datenschutz</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/datenschutz"/>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
-    <loc>https://webdesign-factory.de/agbs</loc>
+    <loc>https://gcz-webdesign.de/agbs</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gcz-webdesign.de/agbs"/>
+    <lastmod>2024-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
 </urlset>

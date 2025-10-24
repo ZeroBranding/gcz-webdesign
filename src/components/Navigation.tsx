@@ -94,9 +94,11 @@ export const Navigation = () => {
 
           {/* Center: Webdesign Fabrik mit Feuer */}
           <div className="absolute left-1/2 -translate-x-1/2">
-            <FireText 
-              text="Webdesign Fabrik" 
+            <FireText
+              text="Webdesign Fabrik"
               className="text-2xl lg:text-3xl font-heading"
+              ariaLabel="Webdesign Fabrik - German Code Zero"
+              priority="high"
             />
           </div>
 
