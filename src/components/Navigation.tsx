@@ -77,19 +77,24 @@ export const Navigation = () => {
             </Link>
           </div>
 
-          {/* Center: Logo with Animation */}
-          <Link to="/" className="absolute left-1/2 -translate-x-1/2 lg:relative lg:left-0 lg:translate-x-0">
-            <motion.img
-              src={logo}
-              alt="German Code Zero"
-              className="h-12 w-auto"
-              whileHover={{ scale: 1.1, rotate: [0, -10, 10, -5, 5, 0] }}
-              transition={{ duration: 0.5 }}
-            />
-          </Link>
+          {/* Center: Brand Name */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <h1 className="text-2xl lg:text-3xl font-heading font-bold text-gradient-gold-luxury tracking-wider">
+              Webdesign Fabrik
+            </h1>
+          </div>
 
-          {/* Right: Navigation Items */}
+          {/* Right: Logo + Navigation Items */}
           <div className="flex items-center gap-3">
+            <Link to="/" className="hidden lg:block mr-4">
+              <motion.img
+                src={logo}
+                alt="German Code Zero"
+                className="h-16 w-auto"
+                whileHover={{ scale: 1.1, rotate: [0, -10, 10, -5, 5, 0] }}
+                transition={{ duration: 0.5 }}
+              />
+            </Link>
             <LanguageSelector />
 
             <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-muted rounded-lg">
