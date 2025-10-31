@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { usePayment } from "@/contexts/PaymentContext";
-import { useOrder } from "@/contexts/OrderContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   CreditCard,
   CheckCircle,
-  AlertCircle,
   Shield,
   Lock,
-  Zap,
-  Crown
+  Zap
 } from "lucide-react";
 import { toast } from "sonner";
 

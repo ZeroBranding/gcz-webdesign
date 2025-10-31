@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { useOrder } from "@/contexts/OrderContext";
@@ -13,7 +12,6 @@ import {
   CheckCircle,
   AlertCircle,
   FileText,
-  Calendar,
   Euro,
   Crown,
   Zap
@@ -22,7 +20,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { user } = useAuth();
-  const { orders, getOrdersByCustomer, payDeposit, payFinal } = useOrder();
+  const { getOrdersByCustomer, payDeposit, payFinal } = useOrder();
 
   if (!user) {
     return (

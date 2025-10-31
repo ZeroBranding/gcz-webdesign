@@ -298,7 +298,7 @@ export const EnhancedFireText: React.FC<EnhancedFireTextProps> = ({
               animate={parallax ? {
                 x: mousePosition.x * 10 * (index + 1),
                 y: mousePosition.y * 5 * (index + 1)
-              } : undefined}
+              } : false}
               transition={{ type: "spring", stiffness: 100, damping: 25 }}
               aria-hidden="true"
             >
@@ -322,7 +322,7 @@ export const EnhancedFireText: React.FC<EnhancedFireTextProps> = ({
                 animate={parallax ? {
                   x: mousePosition.x * 15 * (index + 1),
                   y: mousePosition.y * 8 * (index + 1)
-                } : undefined}
+                } : false}
                 transition={{ type: "spring", stiffness: 80, damping: 30 }}
                 aria-hidden="true"
               >
@@ -347,7 +347,7 @@ export const EnhancedFireText: React.FC<EnhancedFireTextProps> = ({
                 animate={parallax ? {
                   x: mousePosition.x * 8 * (index + 1),
                   y: mousePosition.y * 12 * (index + 1)
-                } : undefined}
+                } : false}
                 transition={{ type: "spring", stiffness: 60, damping: 35 }}
                 aria-hidden="true"
               >

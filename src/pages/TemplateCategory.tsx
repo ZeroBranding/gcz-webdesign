@@ -1,15 +1,13 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ShoppingCart, Search, Filter, Zap, Shield, Star, Clock, ArrowLeft } from "lucide-react";
+import { ShoppingCart, Search, Zap, Shield, Star, Clock, ArrowLeft } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { TemplateData } from "@/types";
 import templatesData from "@/data/templates.json";
-import serviceLevelsData from "@/data/serviceLevels.json";
 
 export default function TemplateCategory() {
   const { category } = useParams<{ category: string }>();

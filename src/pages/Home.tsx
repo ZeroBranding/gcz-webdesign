@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeroBackground } from "@/components/HeroBackground";
-import { FireText } from "@/components/FireText";
-import { Zap, Puzzle, Lock, Palette, Gauge, Shield, Users, FileText, Clock, Award } from "lucide-react";
+import { Zap, Puzzle, Lock, Palette, Gauge, Shield, Users, FileText, Clock } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const stats = [

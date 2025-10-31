@@ -13,18 +13,17 @@ interface SEOProps {
   structuredData?: object;
 }
 
-export const SEO: React.FC<SEOProps> = ({
-  title = "Webdesign Fabrik - Premium Templates | German Code Zero",
-  description = "Professionelle Webdesign Templates für alle Branchen. Responsive, SEO-optimiert und sofort einsatzbereit. Bis zu 94% Rabatt auf Premium-Designs.",
-  keywords = "Webdesign, Templates, Responsive Design, SEO, German Code Zero, Webdesign Fabrik",
-  image = "/og-image.jpg",
-  url = "https://gcz-webdesign.de",
-  type = "website",
-  author = "German Code Zero",
-  publishedTime,
-  modifiedTime,
-  structuredData
-}) => {
+export const SEO: React.FC<SEOProps> = (props) => {
+  const {
+    title = "Webdesign Fabrik - Premium Templates | German Code Zero",
+    description = "Professionelle Webdesign Templates für alle Branchen. Responsive, SEO-optimiert und sofort einsatzbereit. Bis zu 94% Rabatt auf Premium-Designs.",
+    keywords = "Webdesign, Templates, Responsive Design, SEO, German Code Zero, Webdesign Fabrik",
+    image = "/og-image.jpg",
+    url = "https://gcz-webdesign.de",
+    type = "website",
+    author = "German Code Zero",
+    structuredData
+  } = props;
   const fullTitle = `${title} | German Code Zero`;
   const fullUrl = `${url}${typeof window !== 'undefined' ? window.location.pathname : ''}`;
 

@@ -140,7 +140,7 @@ export const ChatAssistant = () => {
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768;
-      setChatSize(prev => ({
+      setChatSize(() => ({
         width: mobile ? 320 : 384,
         height: mobile ? 500 : 600
       }));
@@ -161,7 +161,13 @@ export const ChatAssistant = () => {
       const oneHour = 60 * 60 * 1000;
       
       if (now - lastActivity > oneHour && messages.length > 1) {
-        setMessages([messages[0]]);
+        setMessages((prevMessages) => {
+          const firstMessage = prevMessages[0];
+          if (firstMessage) {
+            return [firstMessage];
+          }
+          return prevMessages;
+        });
         localStorage.removeItem("gcz_chat");
         toast.info("Chat-Verlauf wurde aufgrund von Inaktivität zurückgesetzt");
       }
@@ -441,7 +447,7 @@ ${gczKnowledge.company.address}
     }
 
     // Fallback - LLM-style intelligente Antwort
-    const fallbackResponses = [
+    const fallbackResponses = () => [
       `🤔 Interessante Frage! Als Ihr GCZ-Agent helfe ich gerne bei allen Themen rund um Webdesign und Templates. ${user ? `Was möchten Sie als nächstes wissen, ${user.name}?` : 'Was kann ich für Sie tun?'}`,
 
       `💡 Gute Frage! Bei German Code Zero finden Sie professionelle Lösungen für alle Branchen. ${user ? `${user.name}, ` : ''}Ich erkläre gerne alle Details zu Templates, Preisen oder Services.`,
@@ -451,7 +457,8 @@ ${gczKnowledge.company.address}
       `🚀 Vielen Dank für Ihre Frage! German Code Zero bietet ${gczKnowledge.templates.total} Templates in ${gczKnowledge.templates.categories.length} Kategorien. ${user ? `${user.name}, ` : ''}Wie kann ich Ihnen am besten helfen?`
     ];
 
-    return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+    const fallbackResponse = fallbackResponses()[Math.floor(Math.random() * fallbackResponses().length)] || "Wie kann ich Ihnen helfen?";
+    return fallbackResponse;
   };
 
   const handleSend = async () => {

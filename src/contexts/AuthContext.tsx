@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { User } from "@/types";
 
 interface AuthContextType {
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const userData: User = {
           id: Math.random().toString(36).substr(2, 9),
           email,
-          name: email.split('@')[0],
+          name: email.split('@')[0] || 'User',
           role: 'customer',
           createdAt: new Date().toISOString(),
           lastLogin: new Date().toISOString()
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const register = async (email: string, password: string, name: string) => {
+  const register = async (email: string, _password: string, name: string) => {
     setLoading(true);
     try {
       // Simuliere API-Aufruf

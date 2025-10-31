@@ -1,10 +1,8 @@
-import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Check, ShoppingCart, Eye, Download, Star, Zap, Shield, Clock } from "lucide-react";
+import { ArrowLeft, Check, ShoppingCart, Eye, Download, Star, Zap, Shield } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 
 // Template-Daten (aktualisiert mit neuen Level-Namen und Preisen)

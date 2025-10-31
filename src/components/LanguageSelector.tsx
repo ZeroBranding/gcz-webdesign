@@ -17,7 +17,7 @@ const languages = [
 ];
 
 export const LanguageSelector = () => {
-  const [currentLang, setCurrentLang] = useState(languages[0]);
+  const [currentLang, setCurrentLang] = useState(languages[0] || { code: 'de', label: 'Deutsch', flag: '🇩🇪' });
 
   return (
     <DropdownMenu>

@@ -12,16 +12,16 @@ interface FireTextProps {
   animated?: boolean;
 }
 
-export const FireText: React.FC<FireTextProps> = ({
-  text,
-  className = "",
-  ariaLabel,
-  priority = "medium",
-  variant = "classic",
-  intensity = "medium",
-  glow = true,
-  animated = true
-}) => {
+export const FireText: React.FC<FireTextProps> = (props) => {
+  const {
+    text,
+    className = "",
+    ariaLabel,
+    priority = "medium",
+    variant = "classic",
+    glow = true,
+    animated = true
+  } = props;
   const [flickerValues, setFlickerValues] = useState<number[]>([]);
 
   useEffect(() => {

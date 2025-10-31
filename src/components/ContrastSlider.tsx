@@ -26,7 +26,7 @@ export const ContrastSlider = () => {
           </div>
           <Slider
             value={[contrast]}
-            onValueChange={(values) => setContrast(values[0])}
+            onValueChange={(values) => setContrast(values?.[0] ?? 50)}
             min={0}
             max={100}
             step={10}

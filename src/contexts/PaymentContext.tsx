@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 import { toast } from "sonner";
 
 export interface PaymentMethod {
@@ -90,7 +90,7 @@ export const PaymentProvider = ({ children }: { children: ReactNode }) => {
     return (amount * selectedMethod.fees) / 100;
   };
 
-  const processPayment = async (orderId: string): Promise<boolean> => {
+  const processPayment = async (_orderId: string): Promise<boolean> => {
     if (!selectedMethod || !orderData) {
       toast.error("Bitte wählen Sie eine Zahlungsmethode aus");
       return false;
